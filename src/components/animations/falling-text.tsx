@@ -37,15 +37,26 @@ export const FallingText: React.FC<FallingTextProps> = ({
     if (!textRef.current) return;
     const words = text.split(' ');
 
+    const icons = [
+      `<svg class="w-4 h-4 text-inherit" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
+      `<svg class="w-4 h-4 text-inherit" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
+      `<svg class="w-4 h-4 text-inherit" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+      `<svg class="w-4 h-4 text-inherit" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+      `<svg class="w-4 h-4 text-inherit" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`,
+    ];
+
     const newHTML = words
-      .map(word => {
+      .map((word, i) => {
         const isHighlighted = highlightWords.some(hw => word.startsWith(hw));
+        const icon = isHighlighted ? icons[i % icons.length] : '';
+        const rotateClass = i % 2 === 0 ? 'hover:rotate-3' : 'hover:-rotate-3';
+        
         return `<span
-          class="relative inline-block mx-[2px] my-[2px] px-6 py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.15)] border select-none cursor-grab active:cursor-grabbing font-bold tracking-widest uppercase text-xs transition-all duration-300 hover:scale-[1.15] hover:-translate-y-1 hover:shadow-primary/40 active:scale-95 overflow-hidden group/pill ${itemClass} ${isHighlighted ? highlightClass : ''}"
+          class="relative inline-block mx-[2px] my-[2px] px-6 py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.15)] border select-none cursor-grab active:cursor-grabbing font-bold tracking-widest uppercase text-xs transition-all duration-300 hover:scale-[1.15] ${rotateClass} hover:-translate-y-1 hover:shadow-primary/40 active:scale-95 overflow-hidden group/pill ${itemClass} ${isHighlighted ? highlightClass : ''}"
         >
           <span class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent w-[200%] -translate-x-full group-hover/pill:animate-[sweep_2s_ease-in-out_infinite] z-0 pointer-events-none mix-blend-overlay"></span>
           <span class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></span>
-          <span class="relative z-10 flex items-center gap-2">${word}</span>
+          <span class="relative z-10 flex items-center gap-2">${icon}${word}</span>
         </span>`;
       })
       .join(' ');
