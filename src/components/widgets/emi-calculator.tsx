@@ -64,33 +64,33 @@ export function EMICalculator({
   const strokeDashoffset = circleCircumference - (circleCircumference * principalPercent) / 100;
 
   return (
-    <div className="w-full max-w-6xl mx-auto relative group">
+    <div className="w-full max-w-4xl mx-auto relative group">
       {/* Soft background glow matching the light theme */}
-      <div className="absolute -inset-4 bg-primary/5 rounded-[3rem] blur-2xl opacity-50 transition-opacity duration-700" />
+      <div className="absolute -inset-2 bg-primary/5 rounded-[2.5rem] blur-xl opacity-50 transition-opacity duration-700" />
       
-      <div className="relative bg-card rounded-[2.5rem] shadow-[0_8px_40px_rgba(0,0,0,0.06)] border border-border/60 overflow-hidden flex flex-col lg:flex-row">
+      <div className="relative bg-card rounded-[2rem] shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-border/50 overflow-hidden flex flex-col md:flex-row">
         
         {/* Left Side: Sliders */}
-        <div className="lg:w-7/12 p-8 md:p-14 border-b lg:border-b-0 lg:border-r border-border/60 relative bg-white/50 backdrop-blur-sm">
-          <div className="relative z-10 flex items-center gap-3 mb-12">
-            <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 shadow-sm">
-              <Calculator className="w-6 h-6" />
+        <div className="md:w-3/5 p-6 md:p-10 border-b md:border-b-0 md:border-r border-border/50 relative bg-white/50 backdrop-blur-sm">
+          <div className="relative z-10 flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center border border-primary/20 shadow-sm">
+              <Calculator className="w-5 h-5" />
             </div>
-            <h3 className="text-2xl font-bold font-heading text-foreground">Interactive Planner</h3>
+            <h3 className="text-xl font-bold font-heading text-foreground">Interactive Planner</h3>
           </div>
 
-          <div className="relative z-10 space-y-12">
+          <div className="relative z-10 space-y-8">
             {/* Amount */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Principal</span>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Principal</span>
                 <div className="flex items-center text-foreground group">
-                  <span className="text-muted-foreground/60 text-2xl font-light mr-1">₹</span>
+                  <span className="text-muted-foreground/60 text-xl font-light mr-1">₹</span>
                   <Input
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(Number(e.target.value))}
-                    className="w-36 text-right font-bold text-3xl md:text-4xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground shadow-none"
+                    className="w-32 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground shadow-none"
                   />
                 </div>
               </div>
@@ -101,23 +101,23 @@ export function EMICalculator({
                   max={maxAmount}
                   step={10000}
                   onValueChange={(vals) => setAmount(vals[0])}
-                  className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                  className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-sm"
                 />
               </div>
             </div>
 
             {/* Tenure */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Tenure</span>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Tenure</span>
                 <div className="flex items-baseline text-foreground">
                   <Input
                     type="number"
                     value={tenure}
                     onChange={(e) => setTenure(Number(e.target.value))}
-                    className="w-20 text-right font-bold text-3xl md:text-4xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-2 shadow-none"
+                    className="w-16 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-1 shadow-none"
                   />
-                  <span className="text-muted-foreground font-medium text-xl">mo</span>
+                  <span className="text-muted-foreground font-medium text-lg">mo</span>
                 </div>
               </div>
               <Slider
@@ -126,23 +126,23 @@ export function EMICalculator({
                 max={maxTenure}
                 step={1}
                 onValueChange={(vals) => setTenure(vals[0])}
-                className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-sm"
               />
             </div>
 
             {/* Rate */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               <div className="flex justify-between items-end">
-                <span className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Rate (p.a.)</span>
+                <span className="text-xs font-bold text-muted-foreground uppercase tracking-widest">Rate (p.a.)</span>
                 <div className="flex items-baseline text-foreground">
                   <Input
                     type="number"
                     value={rate}
                     onChange={(e) => setRate(Number(e.target.value))}
                     step={0.1}
-                    className="w-24 text-right font-bold text-3xl md:text-4xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-1 shadow-none"
+                    className="w-20 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-1 shadow-none"
                   />
-                  <span className="text-muted-foreground font-medium text-xl">%</span>
+                  <span className="text-muted-foreground font-medium text-lg">%</span>
                 </div>
               </div>
               <Slider
@@ -151,29 +151,29 @@ export function EMICalculator({
                 max={36}
                 step={0.1}
                 onValueChange={(vals) => setRate(vals[0])}
-                className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-[0_0_10px_rgba(0,0,0,0.1)]"
+                className="py-1 [&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary [&_[role=slider]]:shadow-sm"
               />
             </div>
           </div>
         </div>
 
         {/* Right Side: Results & Magic */}
-        <div className="lg:w-5/12 bg-primary/[0.02] p-8 md:p-14 flex flex-col justify-between relative">
+        <div className="md:w-2/5 bg-primary/[0.02] p-6 md:p-10 flex flex-col justify-between relative">
           
           <div>
-            <div className="mb-10 text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6">
+            <div className="mb-8 text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider mb-4">
                 Secure Calculation
               </div>
-              <p className="text-muted-foreground text-sm uppercase tracking-widest font-bold mb-2">Est. Monthly EMI</p>
-              <div className="text-5xl md:text-6xl font-extrabold tracking-tighter text-primary">
-                <span className="text-3xl text-primary/50 font-light mr-1">₹</span>
+              <p className="text-muted-foreground text-xs uppercase tracking-widest font-bold mb-1">Est. Monthly EMI</p>
+              <div className="text-4xl md:text-5xl font-extrabold tracking-tighter text-primary">
+                <span className="text-2xl text-primary/50 font-light mr-1">₹</span>
                 {emi.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
               </div>
             </div>
 
             {/* Elegant Circular Data Ring */}
-            <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center">
+            <div className="relative w-32 h-32 mx-auto mb-6 flex items-center justify-center">
               <svg className="w-full h-full transform -rotate-90 relative z-10" viewBox="0 0 100 100">
                 {/* Background ring (Interest) */}
                 <circle
@@ -196,39 +196,39 @@ export function EMICalculator({
               
               {/* Inner Text */}
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20">
-                <span className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-0.5">Principal</span>
-                <span className="text-2xl font-extrabold text-foreground">{Math.round(principalPercent)}%</span>
+                <span className="text-[9px] uppercase tracking-widest text-muted-foreground font-bold mb-0.5">Principal</span>
+                <span className="text-xl font-extrabold text-foreground">{Math.round(principalPercent)}%</span>
               </div>
             </div>
 
             {/* Legend / Breakdown */}
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="p-5 rounded-2xl bg-white border border-border/50 shadow-sm text-center transition-transform hover:-translate-y-1 duration-300">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary" />
-                  <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Principal</span>
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div className="p-3 rounded-xl bg-white border border-border/50 shadow-sm text-center">
+                <div className="flex items-center justify-center gap-1.5 mb-1">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">Principal</span>
                 </div>
-                <div className="font-bold text-foreground text-lg">{formatCurrency(amount)}</div>
+                <div className="font-bold text-foreground text-sm">{formatCurrency(amount)}</div>
               </div>
-              <div className="p-5 rounded-2xl bg-white border border-border/50 shadow-sm text-center transition-transform hover:-translate-y-1 duration-300">
-                <div className="flex items-center justify-center gap-2 mb-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-primary/20" />
-                  <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Interest</span>
+              <div className="p-3 rounded-xl bg-white border border-border/50 shadow-sm text-center">
+                <div className="flex items-center justify-center gap-1.5 mb-1">
+                  <div className="w-2 h-2 rounded-full bg-primary/20" />
+                  <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">Interest</span>
                 </div>
-                <div className="font-bold text-foreground text-lg">{formatCurrency(totalInterest)}</div>
+                <div className="font-bold text-foreground text-sm">{formatCurrency(totalInterest)}</div>
               </div>
             </div>
 
-            <div className="flex justify-between items-center py-4 border-t border-border/60">
-              <span className="text-muted-foreground font-bold text-sm uppercase tracking-wider">Total Payable</span>
-              <span className="text-2xl font-extrabold tracking-tight text-foreground">{formatCurrency(totalPayment)}</span>
+            <div className="flex justify-between items-center py-3 border-t border-border/60">
+              <span className="text-muted-foreground font-bold text-xs uppercase tracking-wider">Total Payable</span>
+              <span className="text-lg font-extrabold tracking-tight text-foreground">{formatCurrency(totalPayment)}</span>
             </div>
           </div>
 
-          <div className="mt-8">
+          <div className="mt-6">
             <Link href="/apply">
-              <Button className="w-full h-14 rounded-2xl text-base font-bold tracking-wide shadow-lg hover:shadow-xl transition-all hover:-translate-y-0.5">
-                Apply With This Plan <ArrowRight className="w-5 h-5 ml-2" />
+              <Button className="w-full h-12 rounded-xl text-sm font-bold tracking-wide shadow-md hover:shadow-lg transition-all hover:-translate-y-0.5">
+                Apply With This Plan <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
           </div>
