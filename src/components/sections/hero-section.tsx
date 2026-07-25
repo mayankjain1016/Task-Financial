@@ -197,7 +197,7 @@ export function HeroSection() {
               {/* Mini Interactive Sandbox */}
               <div className="w-full h-40 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden relative shadow-inner group">
                 <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                   <p className="text-[11px] text-blue-600 font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm border border-blue-100 animate-bounce">Click to Explode!</p>
+                   <p className="text-[9px] text-blue-600 font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm border border-blue-100 text-center leading-relaxed">Move mouse to pull.<br/>Click to Explode!</p>
                 </div>
                 <FallingText 
                   text="🍎Apple 🟩NVDA ₿BTC 💰Gold 💵Cash 📜Bonds 🚀Scale"

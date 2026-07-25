@@ -186,15 +186,15 @@ export const FallingText: React.FC<FallingTextProps> = ({
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
       
-      const explosionForce = 0.08; // Huge blast force
+      const explosionForce = 0.12; // Massive blast force
 
       wordBodies.forEach(({ body }) => {
         const dx = body.position.x - mouseX;
         const dy = body.position.y - mouseY;
         const distance = Math.sqrt(dx * dx + dy * dy);
         
-        if (distance > 0 && distance < 400) {
-           const forceMagnitude = explosionForce * (1 - distance / 400);
+        if (distance > 0 && distance < 500) {
+           const forceMagnitude = explosionForce * (1 - distance / 500);
            Matter.Body.applyForce(body, body.position, {
              x: (dx / distance) * forceMagnitude,
              y: (dy / distance) * forceMagnitude
@@ -203,11 +203,38 @@ export const FallingText: React.FC<FallingTextProps> = ({
       });
     };
 
+    // The Magnet Hover Effect
+    const handleCanvasMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current || !engine) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      const magnetForce = 0.002; // Gentle pull towards mouse
+
+      wordBodies.forEach(({ body }) => {
+        const dx = mouseX - body.position.x;
+        const dy = mouseY - body.position.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Only pull objects that are somewhat close (within 250px)
+        if (distance > 30 && distance < 250) {
+           const forceMagnitude = magnetForce * (1 - distance / 250);
+           Matter.Body.applyForce(body, body.position, {
+             x: (dx / distance) * forceMagnitude,
+             y: (dy / distance) * forceMagnitude - 0.001 // extra anti-gravity lift
+           });
+        }
+      });
+    };
+
     const containerEl = containerRef.current;
     containerEl.addEventListener('click', handleCanvasClick);
+    containerEl.addEventListener('mousemove', handleCanvasMouseMove);
 
     return () => {
       containerEl.removeEventListener('click', handleCanvasClick);
+      containerEl.removeEventListener('mousemove', handleCanvasMouseMove);
       Render.stop(render);
       Runner.stop(runner);
       if (render.canvas && canvasContainerRef.current) {
