@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, ShieldCheck, Zap, Sparkles, Banknote, Landmark } from "lucide-react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { ArrowRight, Sparkles, Wifi, Activity } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FallingText } from "@/components/animations/falling-text";
@@ -15,210 +15,201 @@ export function HeroSection() {
     offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    const x = (clientX / innerWidth - 0.5) * 40; // Max 20 degrees rotation Y
+    const y = (clientY / innerHeight - 0.5) * -40; // Max 20 degrees rotation X
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const rotateY = useSpring(mouseX, { damping: 30, stiffness: 100, mass: 0.5 });
+  const rotateX = useSpring(mouseY, { damping: 30, stiffness: 100, mass: 0.5 });
 
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-white pt-32 pb-0 perspective-[2000px]"
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-white pt-24 pb-12 perspective-[2000px]"
     >
-      {/* Background Ambient Glows & Grid */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center">
-        <div className="absolute inset-0 blueprint-grid opacity-[0.15]" />
+      {/* Complex Liquid Background & Grids */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 blueprint-grid opacity-[0.2]" />
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
         
-        {/* Central Glows */}
+        {/* Dynamic Mesh Orbs */}
         <motion.div 
-          animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.6, 0.4] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] max-w-4xl h-[500px] rounded-[100%] bg-blue-500/10 blur-[120px]" 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.6, 0.4], x: [0, 100, 0], y: [0, -50, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-blue-500/15 blur-[120px]" 
         />
         <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[60vw] max-w-2xl h-[400px] rounded-[100%] bg-cyan-400/10 blur-[100px]" 
+          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.5, 0.3], x: [0, -100, 0], y: [0, 100, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-cyan-400/15 blur-[140px]" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] h-[30vw] rounded-full bg-indigo-500/10 blur-[100px]" 
         />
       </div>
 
-      {/* Top Center Typography Section */}
-      <motion.div 
-        style={{ y, opacity }}
-        className="container relative z-20 px-4 md:px-8 w-full max-w-5xl mx-auto flex flex-col items-center text-center mt-12 mb-20"
-      >
-        <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-blue-50/80 backdrop-blur-md shadow-[0_0_20px_rgba(37,99,235,0.05)] border border-blue-100/50 text-xs font-bold tracking-widest text-blue-700 mb-8 uppercase"
-        >
-          <Sparkles className="w-4 h-4 text-blue-600" /> Introducing Task Financial 2.0
-        </motion.div>
-
-        <h1 className="text-6xl md:text-7xl lg:text-[7rem] font-heading font-black text-slate-900 tracking-tighter leading-[1] mb-8">
+      <div className="container relative z-10 px-4 md:px-8 w-full max-w-7xl mx-auto flex flex-col pt-12">
+        
+        {/* Bento Grid Container */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 w-full h-[800px]">
+          
+          {/* Card 1: Main Typography (Spans 2 columns) */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="md:col-span-2 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-10 flex flex-col justify-center relative overflow-hidden group"
           >
-            Banking,
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-500 pb-4"
-          >
-            Redefined.
-          </motion.div>
-        </h1>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 blur-3xl -mr-20 -mt-20 rounded-full group-hover:scale-150 transition-transform duration-1000" />
+            
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 w-max shadow-sm border border-blue-100/50 text-[10px] font-black tracking-[0.2em] text-blue-600 mb-8 uppercase"
+            >
+              <Sparkles className="w-3 h-3 text-blue-500" /> Task Financial Platform
+            </motion.div>
 
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-          className="text-xl md:text-2xl text-slate-600 font-medium max-w-3xl leading-relaxed mb-12"
-        >
-          Access exclusive lending products, manage your wealth, and scale your business with absolute precision. The future of finance is here.
-        </motion.p>
+            <h1 className="text-5xl lg:text-[4.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1] mb-6">
+              Banking, <br/>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-500">
+                Redefined.
+              </span>
+            </h1>
 
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
-        >
-          <Link href="/apply" className="w-full sm:w-auto group">
-            <Button size="lg" className="relative overflow-hidden w-full h-14 px-10 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg font-bold shadow-[0_10px_40px_rgba(37,99,235,0.3)] transition-all hover:scale-105 hover:shadow-[0_15px_60px_rgba(37,99,235,0.4)]">
-              <span className="relative z-10 flex items-center">Start Building <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
-              <motion.div 
-                animate={{ x: ["-200%", "200%"] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-[150%] skew-x-12 z-0"
-              />
-            </Button>
-          </Link>
-          <Link href="/contact" className="w-full sm:w-auto group">
-            <Button size="lg" variant="outline" className="w-full h-14 px-10 bg-white backdrop-blur-md hover:bg-blue-50 text-blue-600 border-blue-200 rounded-full text-lg font-bold transition-all shadow-sm">
-              Contact Sales
-            </Button>
-          </Link>
-        </motion.div>
-      </motion.div>
+            <p className="text-lg text-slate-600 font-medium max-w-lg leading-relaxed mb-8">
+              Access exclusive lending products, manage your wealth, and scale your business with absolute precision.
+            </p>
 
-      {/* The Rising Dashboard Mockup */}
-      <motion.div 
-        style={{ rotateX: useTransform(scrollYProgress, [0, 1], [15, 0]), y: useTransform(scrollYProgress, [0, 1], [100, -50]), scale: useTransform(scrollYProgress, [0, 1], [0.95, 1.05]) }}
-        className="relative z-30 w-[95vw] max-w-6xl mx-auto h-[700px] rounded-t-[2.5rem] border border-b-0 border-slate-200/60 bg-white/60 backdrop-blur-3xl shadow-[0_-20px_80px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col items-center pt-6 px-6"
-      >
-        {/* MacOS Style Window Header */}
-        <div className="w-full max-w-5xl flex items-center justify-between mb-8">
-          <div className="flex gap-2">
-            <div className="w-3 h-3 rounded-full bg-slate-300" />
-            <div className="w-3 h-3 rounded-full bg-slate-300" />
-            <div className="w-3 h-3 rounded-full bg-slate-300" />
-          </div>
-          <div className="px-3 py-1 rounded-md bg-slate-100 text-[10px] font-bold text-slate-400 tracking-widest uppercase flex items-center gap-2">
-            <ShieldCheck className="w-3 h-3" /> Secure Connection
-          </div>
-          <div className="w-12" /> {/* Spacer */}
-        </div>
-
-        {/* Mockup Dashboard Content */}
-        <div className="w-full max-w-5xl h-full flex gap-6">
-          {/* Sidebar */}
-          <div className="w-64 h-full flex flex-col gap-2 border-r border-slate-200/50 pr-6">
-            <div className="w-full h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center px-4 gap-3 font-semibold text-sm mb-4">
-              <Landmark className="w-4 h-4" /> Dashboard
+            <div className="flex gap-4">
+              <Link href="/apply">
+                <Button size="lg" className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-base font-bold shadow-xl shadow-blue-600/30 transition-all hover:scale-105">
+                  Get Started <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link href="/products">
+                <Button size="lg" variant="outline" className="h-14 px-8 bg-white hover:bg-blue-50 text-blue-700 border-blue-200 rounded-full text-base font-bold transition-all shadow-sm">
+                  View Products
+                </Button>
+              </Link>
             </div>
-            {['Transactions', 'Loans', 'Investments', 'Settings'].map((item, i) => (
-              <div key={i} className="w-full h-10 rounded-xl hover:bg-slate-50 text-slate-500 flex items-center px-4 gap-3 font-medium text-sm transition-colors cursor-pointer">
-                <div className="w-4 h-4 rounded bg-slate-200" /> {item}
-              </div>
-            ))}
-          </div>
+          </motion.div>
 
-          {/* Main Dashboard Area */}
-          <div className="flex-1 flex flex-col gap-6">
-            <div className="w-full flex justify-between items-end mb-4">
-              <div>
-                <p className="text-sm font-bold text-slate-400 tracking-wider uppercase mb-1">Total Balance</p>
-                <h3 className="text-5xl font-black text-slate-900 tracking-tight">₹4,52,35,000</h3>
-              </div>
-              <Button className="bg-slate-900 hover:bg-slate-800 text-white rounded-xl shadow-lg">
-                <Banknote className="w-4 h-4 mr-2" /> Request Transfer
-              </Button>
+          {/* Card 2: 3D Holographic Credit Card (Spans 1 column, 2 rows) */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="md:col-span-1 md:row-span-2 rounded-[2.5rem] bg-gradient-to-b from-slate-900 to-blue-950 p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.4)] perspective-[1000px]"
+          >
+            {/* Dark background details */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
+            <div className="absolute top-0 right-0 w-full h-1/2 bg-gradient-to-b from-blue-500/20 to-transparent blur-3xl" />
+            
+            <div className="w-full flex justify-between items-center mb-10 relative z-10">
+              <h4 className="font-bold text-white text-lg">Premium Card</h4>
+              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-6">
-              {[
-                { label: 'Active Loans', value: '3', trend: '+1', color: 'text-blue-600', bg: 'bg-blue-50' },
-                { label: 'Monthly Payment', value: '₹1.2L', trend: '-5%', color: 'text-emerald-600', bg: 'bg-emerald-50' },
-                { label: 'Credit Score', value: '850', trend: 'Excellent', color: 'text-purple-600', bg: 'bg-purple-50' },
-              ].map((stat, i) => (
-                <div key={i} className="p-5 rounded-2xl border border-slate-100 bg-white shadow-sm flex flex-col justify-between">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${stat.bg} ${stat.color}`}>
-                      <Zap className="w-5 h-5" />
-                    </div>
-                    <span className="text-xs font-bold text-slate-400">{stat.trend}</span>
-                  </div>
-                  <p className="text-xs font-bold text-slate-500 tracking-widest uppercase mb-1">{stat.label}</p>
-                  <p className="text-2xl font-black text-slate-900">{stat.value}</p>
+            {/* The 3D Interactive Card */}
+            <motion.div 
+              style={{ rotateX, rotateY }}
+              className="w-full aspect-[2/3] max-w-[280px] rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/20 p-6 flex flex-col justify-between relative transform-style-3d shadow-2xl group cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[sweep_2s_ease-in-out_infinite] pointer-events-none rounded-3xl z-40" />
+              
+              <div className="w-full flex justify-between items-start z-10">
+                <div className="w-12 h-8 rounded bg-white/20 backdrop-blur-sm" />
+                <Wifi className="w-6 h-6 text-white/50 rotate-90" />
+              </div>
+
+              <div className="z-10">
+                <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-2">Total Balance</p>
+                <h3 className="text-3xl font-black text-white tracking-tighter">₹12,45,000</h3>
+              </div>
+
+              <div className="w-full flex justify-between items-end z-10">
+                <p className="text-white font-bold tracking-widest">**** **** **** 4092</p>
+                <div className="flex -space-x-2">
+                  <div className="w-6 h-6 rounded-full bg-red-500/80 mix-blend-screen" />
+                  <div className="w-6 h-6 rounded-full bg-yellow-500/80 mix-blend-screen" />
                 </div>
+              </div>
+            </motion.div>
+
+            <p className="text-blue-200/60 text-xs font-semibold mt-10 tracking-widest uppercase relative z-10">Hover to rotate</p>
+          </motion.div>
+
+          {/* Card 3: Interactive Physics Sandbox */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+            className="md:col-span-1 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 relative overflow-hidden group"
+          >
+            <div className="flex justify-between items-center mb-4 relative z-10">
+              <h4 className="font-bold text-slate-900">Portfolio Assets</h4>
+              <div className="px-3 py-1 rounded bg-blue-50 text-[10px] font-bold text-blue-600 tracking-widest uppercase">Interactive</div>
+            </div>
+            
+            <div className="absolute inset-0 top-16 bottom-4 left-4 right-4 bg-slate-50/50 rounded-2xl border border-slate-100 overflow-hidden shadow-inner">
+              <FallingText 
+                text="Apple Tesla NVDA BTC Gold Bonds Cash Scale Growth"
+                highlightWords={["Apple", "NVDA", "BTC"]}
+                gravity={0.8}
+                fontSize="0.75rem"
+                trigger="auto"
+                backgroundColor="transparent"
+                itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
+                highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-[0_8px_20px_rgba(37,99,235,0.3)]"
+              />
+            </div>
+          </motion.div>
+
+          {/* Card 4: Animated Live Chart */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
+            className="md:col-span-1 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 flex flex-col justify-between relative overflow-hidden"
+          >
+            <div className="flex justify-between items-start mb-6 z-10">
+              <div>
+                <h4 className="font-bold text-slate-900">Cash Flow</h4>
+                <p className="text-xs text-slate-500 font-semibold tracking-wide">+14% this month</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                <Activity className="w-5 h-5 text-blue-600" />
+              </div>
+            </div>
+
+            <div className="flex-1 flex items-end gap-1.5 z-10 h-full mt-4">
+              {Array.from({ length: 18 }).map((_, i) => (
+                <motion.div 
+                  key={i}
+                  initial={{ height: 0 }}
+                  animate={{ height: `${20 + Math.random() * 80}%` }}
+                  transition={{ delay: 1 + (i * 0.05), duration: 1.5, type: 'spring', repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
+                  className={`flex-1 rounded-t-sm ${i % 3 === 0 ? 'bg-blue-600' : 'bg-slate-200'} origin-bottom`}
+                />
               ))}
             </div>
+          </motion.div>
 
-            {/* Lower Dashboard Area: Split Chart and Interactive Physics */}
-            <div className="flex-1 flex gap-6">
-              {/* Fake Chart Area */}
-              <div className="w-1/2 rounded-2xl border border-slate-100 bg-white shadow-sm p-6 flex flex-col">
-                <div className="flex justify-between items-center mb-6">
-                  <h4 className="font-bold text-slate-900">Cash Flow</h4>
-                  <div className="flex gap-2">
-                    {['1W', '1M', '1Y'].map(t => <div key={t} className="px-3 py-1 rounded bg-slate-50 text-xs font-bold text-slate-500">{t}</div>)}
-                  </div>
-                </div>
-                <div className="flex-1 flex items-end gap-1.5">
-                  {Array.from({ length: 16 }).map((_, i) => (
-                    <motion.div 
-                      key={i}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${20 + Math.random() * 80}%` }}
-                      transition={{ delay: 0.5 + (i * 0.05), duration: 1, type: 'spring' }}
-                      className={`flex-1 rounded-t-sm ${i % 4 === 0 ? 'bg-blue-600' : 'bg-slate-200'}`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Interactive Physics Area */}
-              <div className="w-1/2 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/50 to-white shadow-[inset_0_2px_20px_rgba(37,99,235,0.03)] p-6 flex flex-col relative overflow-hidden group">
-                <div className="flex justify-between items-center mb-2 relative z-10">
-                  <h4 className="font-bold text-slate-900">Portfolio Assets</h4>
-                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                </div>
-                <p className="text-xs text-slate-500 mb-4 relative z-10">Drag and drop assets to organize.</p>
-                <div className="absolute inset-0 top-[70px]">
-                  <FallingText 
-                    text="Apple Tesla NVDA BTC Gold Bonds Cash Scale Growth"
-                    highlightWords={["Apple", "NVDA", "BTC"]}
-                    gravity={0.8}
-                    fontSize="0.75rem"
-                    trigger="auto"
-                    backgroundColor="transparent"
-                    itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
-                    highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-[0_8px_20px_rgba(37,99,235,0.3)]"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-
-        {/* Dashboard Fade Overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white via-white/80 to-transparent z-40 pointer-events-none" />
-      </motion.div>
+      </div>
     </section>
   );
 }
