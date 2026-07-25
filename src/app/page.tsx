@@ -141,50 +141,82 @@ export default function Home() {
         </FadeIn>
       </section>
 
-      {/* Rate Comparison Table - Enterprise Style */}
-      <section className="py-24 bg-secondary text-foreground relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl relative z-10">
+      {/* Transparent Pricing - Enterprise Cards */}
+      <section className="py-32 bg-[#F8FAFC] text-slate-900 relative overflow-hidden">
+        {/* Subtle decorative background elements */}
+        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[120px] mix-blend-multiply pointer-events-none" />
+        <div className="absolute bottom-0 left-[-20%] w-[600px] h-[600px] bg-indigo-50/50 rounded-full blur-[100px] mix-blend-multiply pointer-events-none" />
+        
+        <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
           <FadeIn>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Transparent Pricing</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                No hidden fees. What you see is what you pay. Compare our competitive interest rates.
+            <div className="text-center mb-20">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-widest uppercase mb-6 border border-blue-100">
+                <Sparkles className="w-3.5 h-3.5" /> Crystal Clear
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight mb-6 text-slate-900">
+                Transparent Pricing
+              </h2>
+              <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                No hidden fees. What you see is what you pay. Compare our highly competitive enterprise interest rates.
               </p>
             </div>
           </FadeIn>
           
-          <FadeIn delay={0.2}>
-            <div className="bg-card backdrop-blur-md rounded-3xl border border-border overflow-hidden shadow-xl">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse min-w-[600px]">
-                  <thead>
-                    <tr className="bg-muted border-b border-border">
-                      <th className="p-6 font-semibold tracking-wide text-muted-foreground uppercase text-xs">Loan Type</th>
-                      <th className="p-6 font-semibold tracking-wide text-muted-foreground uppercase text-xs">Interest Rate (p.a.)</th>
-                      <th className="p-6 font-semibold tracking-wide text-muted-foreground uppercase text-xs">Processing Fee</th>
-                      <th className="p-6 font-semibold tracking-wide text-muted-foreground uppercase text-xs">Tenure</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border text-sm md:text-base">
-                    {[
-                      { type: "Personal Loan", rate: "10.5% - 24%", fee: "Up to 2.5%", tenure: "12 - 60 Months" },
-                      { type: "Group Loan", rate: "18% - 26%", fee: "Up to 2%", tenure: "12 - 24 Months" },
-                      { type: "Gold Loan", rate: "9% - 15%", fee: "Zero", tenure: "6 - 36 Months" },
-                      { type: "Business Loan", rate: "12% - 22%", fee: "Up to 3%", tenure: "12 - 84 Months" },
-                    ].map((row, i) => (
-                      <tr key={i} className="hover:bg-muted/50 transition-colors">
-                        <td className="p-6 font-medium text-foreground">{row.type}</td>
-                        <td className="p-6 text-primary font-bold">{row.rate}</td>
-                        <td className="p-6 text-foreground/80">{row.fee}</td>
-                        <td className="p-6 text-foreground/80">{row.tenure}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </FadeIn>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {[
+              { type: "Personal Loan", rate: "10.5% - 24%", fee: "Up to 2.5%", tenure: "12 - 60 Months", popular: false, icon: <Users className="w-6 h-6" /> },
+              { type: "Group Loan", rate: "18% - 26%", fee: "Up to 2%", tenure: "12 - 24 Months", popular: false, icon: <HandCoins className="w-6 h-6" /> },
+              { type: "Gold Loan", rate: "9% - 15%", fee: "Zero", tenure: "6 - 36 Months", popular: true, icon: <Landmark className="w-6 h-6" /> },
+              { type: "Business Loan", rate: "12% - 22%", fee: "Up to 3%", tenure: "12 - 84 Months", popular: false, icon: <Building2 className="w-6 h-6" /> },
+            ].map((plan, i) => (
+              <FadeIn key={plan.type} delay={i * 0.1}>
+                <div 
+                  className={`relative flex flex-col h-full bg-white rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] ${
+                    plan.popular 
+                      ? 'border-2 border-blue-500 shadow-[0_8px_30px_rgba(59,130,246,0.12)]' 
+                      : 'border border-slate-200 shadow-sm'
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-[10px] font-bold tracking-widest uppercase py-1.5 px-4 rounded-full shadow-md">
+                      Best Value
+                    </div>
+                  )}
+                  
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-8 ${plan.popular ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600'}`}>
+                    {plan.icon}
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{plan.type}</h3>
+                  <div className="flex items-baseline gap-1 mb-8">
+                    <span className="text-3xl font-extrabold tracking-tight text-slate-900">{plan.rate}</span>
+                    <span className="text-sm font-medium text-slate-500">p.a.</span>
+                  </div>
+
+                  <div className="flex-1 space-y-4">
+                    <div className="flex items-center justify-between py-3 border-b border-slate-100">
+                      <span className="text-sm text-slate-500">Processing Fee</span>
+                      <span className="text-sm font-semibold text-slate-900">{plan.fee}</span>
+                    </div>
+                    <div className="flex items-center justify-between py-3 border-b border-slate-100">
+                      <span className="text-sm text-slate-500">Tenure</span>
+                      <span className="text-sm font-semibold text-slate-900">{plan.tenure}</span>
+                    </div>
+                  </div>
+
+                  <Button 
+                    className={`w-full mt-8 rounded-xl h-12 font-semibold transition-all ${
+                      plan.popular 
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg' 
+                        : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'
+                    }`}
+                  >
+                    Apply Now <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
