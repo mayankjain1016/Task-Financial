@@ -79,14 +79,14 @@ export default function Home() {
       <HeroSection />
 
       {/* Trust Strip - Overlapping the Hero */}
-      <div className="relative z-20 container mx-auto px-4 max-w-6xl -mt-16 mb-24">
+      <div className="relative z-20 container mx-auto px-4 max-w-4xl -mt-16 mb-24">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-          className="bg-card backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border/50 p-6 md:p-8"
+          className="bg-card backdrop-blur-xl rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-border/50 p-4 md:p-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 divide-y md:divide-y-0 md:divide-x divide-border/50">
             <StatCounter value={50000} label="Customers Served" prefix="+" />
             <StatCounter value={1500} label="Crores Disbursed" prefix="₹" suffix=" Cr+" />
             <StatCounter value={24} label="Hours Disbursal Time" suffix=" Hrs" />
