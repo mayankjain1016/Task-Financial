@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ShieldCheck, Zap, Sparkles, Banknote, Landmark } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { FallingText } from "@/components/animations/falling-text";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -168,24 +169,48 @@ export function HeroSection() {
               ))}
             </div>
 
-            {/* Fake Chart Area */}
-            <div className="flex-1 rounded-2xl border border-slate-100 bg-white shadow-sm p-6 flex flex-col">
-              <div className="flex justify-between items-center mb-6">
-                <h4 className="font-bold text-slate-900">Cash Flow</h4>
-                <div className="flex gap-2">
-                  {['1W', '1M', '1Y'].map(t => <div key={t} className="px-3 py-1 rounded bg-slate-50 text-xs font-bold text-slate-500">{t}</div>)}
+            {/* Lower Dashboard Area: Split Chart and Interactive Physics */}
+            <div className="flex-1 flex gap-6">
+              {/* Fake Chart Area */}
+              <div className="w-1/2 rounded-2xl border border-slate-100 bg-white shadow-sm p-6 flex flex-col">
+                <div className="flex justify-between items-center mb-6">
+                  <h4 className="font-bold text-slate-900">Cash Flow</h4>
+                  <div className="flex gap-2">
+                    {['1W', '1M', '1Y'].map(t => <div key={t} className="px-3 py-1 rounded bg-slate-50 text-xs font-bold text-slate-500">{t}</div>)}
+                  </div>
+                </div>
+                <div className="flex-1 flex items-end gap-1.5">
+                  {Array.from({ length: 16 }).map((_, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ height: 0 }}
+                      animate={{ height: `${20 + Math.random() * 80}%` }}
+                      transition={{ delay: 0.5 + (i * 0.05), duration: 1, type: 'spring' }}
+                      className={`flex-1 rounded-t-sm ${i % 4 === 0 ? 'bg-blue-600' : 'bg-slate-200'}`}
+                    />
+                  ))}
                 </div>
               </div>
-              <div className="flex-1 flex items-end gap-2">
-                {Array.from({ length: 24 }).map((_, i) => (
-                  <motion.div 
-                    key={i}
-                    initial={{ height: 0 }}
-                    animate={{ height: `${20 + Math.random() * 80}%` }}
-                    transition={{ delay: 0.5 + (i * 0.05), duration: 1, type: 'spring' }}
-                    className={`flex-1 rounded-t-sm ${i % 5 === 0 ? 'bg-blue-600' : 'bg-slate-200'}`}
+
+              {/* Interactive Physics Area */}
+              <div className="w-1/2 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50/50 to-white shadow-[inset_0_2px_20px_rgba(37,99,235,0.03)] p-6 flex flex-col relative overflow-hidden group">
+                <div className="flex justify-between items-center mb-2 relative z-10">
+                  <h4 className="font-bold text-slate-900">Portfolio Assets</h4>
+                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                </div>
+                <p className="text-xs text-slate-500 mb-4 relative z-10">Drag and drop assets to organize.</p>
+                <div className="absolute inset-0 top-[70px]">
+                  <FallingText 
+                    text="Apple Tesla NVDA BTC Gold Bonds Cash Scale Growth"
+                    highlightWords={["Apple", "NVDA", "BTC"]}
+                    gravity={0.8}
+                    fontSize="0.75rem"
+                    trigger="auto"
+                    backgroundColor="transparent"
+                    itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
+                    highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-[0_8px_20px_rgba(37,99,235,0.3)]"
                   />
-                ))}
+                </div>
               </div>
             </div>
           </div>
