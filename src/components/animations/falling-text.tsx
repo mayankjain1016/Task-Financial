@@ -41,9 +41,11 @@ export const FallingText: React.FC<FallingTextProps> = ({
       .map(word => {
         const isHighlighted = highlightWords.some(hw => word.startsWith(hw));
         return `<span
-          class="inline-block mx-[4px] my-[4px] px-6 py-3 rounded-full shadow-[0_8px_16px_rgba(0,0,0,0.1)] border select-none cursor-grab active:cursor-grabbing font-bold tracking-tight transition-transform hover:scale-105 active:scale-95 ${itemClass} ${isHighlighted ? highlightClass : ''}"
+          class="relative inline-block mx-[2px] my-[2px] px-6 py-3 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.15)] border select-none cursor-grab active:cursor-grabbing font-bold tracking-widest uppercase text-xs transition-all duration-300 hover:scale-[1.15] hover:-translate-y-1 hover:shadow-primary/40 active:scale-95 overflow-hidden group/pill ${itemClass} ${isHighlighted ? highlightClass : ''}"
         >
-          ${word}
+          <span class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent w-[200%] -translate-x-full group-hover/pill:animate-[sweep_2s_ease-in-out_infinite] z-0 pointer-events-none mix-blend-overlay"></span>
+          <span class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none"></span>
+          <span class="relative z-10 flex items-center gap-2">${word}</span>
         </span>`;
       })
       .join(' ');
