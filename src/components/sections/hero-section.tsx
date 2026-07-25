@@ -34,7 +34,7 @@ export function HeroSection() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-white pt-24 pb-12 perspective-[2000px]"
+      className="relative min-h-[75vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white pt-24 pb-8 perspective-[2000px]"
     >
       {/* Complex Liquid Background & Grids */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -59,17 +59,17 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="container relative z-10 px-4 md:px-8 w-full max-w-7xl mx-auto flex flex-col pt-12">
+      <div className="container relative z-10 px-4 md:px-8 w-full max-w-7xl mx-auto flex flex-col pt-8">
         
-        {/* Bento Grid Container */}
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 w-full h-[800px]">
+        {/* Bento Grid Container - Tighter Height */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 w-full h-[550px]">
           
           {/* Card 1: Main Typography (Spans 2 columns) */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="md:col-span-2 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-10 flex flex-col justify-center relative overflow-hidden group"
+            className="md:col-span-2 md:row-span-1 rounded-[2rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 flex flex-col justify-center relative overflow-hidden group"
           >
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 blur-3xl -mr-20 -mt-20 rounded-full group-hover:scale-150 transition-transform duration-1000" />
             
@@ -77,30 +77,30 @@ export function HeroSection() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 w-max shadow-sm border border-blue-100/50 text-[10px] font-black tracking-[0.2em] text-blue-600 mb-8 uppercase"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 w-max shadow-sm border border-blue-100/50 text-[9px] font-black tracking-[0.2em] text-blue-600 mb-6 uppercase"
             >
               <Sparkles className="w-3 h-3 text-blue-500" /> Task Financial Platform
             </motion.div>
 
-            <h1 className="text-5xl lg:text-[4.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1] mb-6">
+            <h1 className="text-4xl lg:text-[3.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1.05] mb-4">
               Banking, <br/>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-500">
                 Redefined.
               </span>
             </h1>
 
-            <p className="text-lg text-slate-600 font-medium max-w-lg leading-relaxed mb-8">
+            <p className="text-base text-slate-600 font-medium max-w-md leading-relaxed mb-6">
               Access exclusive lending products, manage your wealth, and scale your business with absolute precision.
             </p>
 
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <Link href="/apply">
-                <Button size="lg" className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-base font-bold shadow-xl shadow-blue-600/30 transition-all hover:scale-105">
-                  Get Started <ArrowRight className="ml-2 w-5 h-5" />
+                <Button size="default" className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-600/30 transition-all hover:scale-105">
+                  Get Started <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link href="/products">
-                <Button size="lg" variant="outline" className="h-14 px-8 bg-white hover:bg-blue-50 text-blue-700 border-blue-200 rounded-full text-base font-bold transition-all shadow-sm">
+                <Button size="default" variant="outline" className="h-12 px-6 bg-white hover:bg-blue-50 text-blue-700 border-blue-200 rounded-full font-bold transition-all shadow-sm">
                   View Products
                 </Button>
               </Link>
