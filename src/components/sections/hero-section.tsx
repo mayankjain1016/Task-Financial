@@ -23,7 +23,7 @@ export function HeroSection() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-[#000000] pt-32 pb-24 selection:bg-blue-500/30"
+      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#000000] pt-24 pb-16 selection:bg-blue-500/30"
     >
       {/* Background - Deep Technical Dark Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -36,7 +36,7 @@ export function HeroSection() {
       <div className="container relative z-20 px-4 md:px-8 w-full max-w-[1200px] mx-auto flex flex-col items-center text-center">
         
         {/* TOP: Ultra-Refined Dark Typography */}
-        <div className="flex flex-col items-center w-full z-30 pt-8 mb-20">
+        <div className="flex flex-col items-center w-full z-30 pt-4 mb-12">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ export function HeroSection() {
           </div>
 
           {/* Dashboard Body */}
-          <div className="relative z-10 flex flex-col md:flex-row w-full min-h-[400px]">
+          <div className="relative z-10 flex flex-col md:flex-row w-full min-h-[320px]">
             
             {/* Sidebar */}
             <div className="w-full md:w-64 bg-[#050505] border-r border-white/[0.05] p-6 flex flex-col justify-between">
@@ -150,12 +150,12 @@ export function HeroSection() {
             </div>
 
             {/* Main Content */}
-            <div className="flex-1 p-8 bg-[#0A0A0A] flex flex-col justify-between relative">
+            <div className="flex-1 p-6 bg-[#0A0A0A] flex flex-col justify-between relative">
               {/* Internal glowing blur */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/10 blur-[100px] rounded-full pointer-events-none" />
 
               {/* Top Row Data */}
-              <div className="relative z-10 flex justify-between items-start mb-8">
+              <div className="relative z-10 flex justify-between items-start mb-4">
                 <div>
                   <p className="text-[11px] font-medium text-slate-400 uppercase tracking-widest mb-2">Total Managed Capital</p>
                   <h3 className="text-5xl font-semibold text-white tracking-tight">$14,240,000.00</h3>
@@ -166,7 +166,7 @@ export function HeroSection() {
               </div>
 
               {/* Glowing Line Chart */}
-              <div className="relative z-10 w-full h-32 mb-8">
+              <div className="relative z-10 w-full h-24 mb-4">
                 <svg className="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
                   <defs>
                     <linearGradient id="darkChartGrad" x1="0" x2="0" y1="0" y2="1">
