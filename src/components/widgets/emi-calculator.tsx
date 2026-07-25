@@ -59,6 +59,10 @@ export function EMICalculator({
     };
   }, [amount, tenure, rate]);
 
+  // Circumference for the SVG circle (r=40 -> 2 * PI * 40 ~= 251.2)
+  const circleCircumference = 251.2;
+  const strokeDashoffset = circleCircumference - (circleCircumference * principalPercent) / 100;
+
   return (
     <div className="w-full max-w-6xl mx-auto relative group">
       {/* Absolute glow behind the widget */}
@@ -73,7 +77,7 @@ export function EMICalculator({
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
           <div className="relative z-10 flex items-center gap-3 mb-12">
-            <div className="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/30">
+            <div className="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
               <Sparkles className="w-5 h-5" />
             </div>
             <h3 className="text-xl font-medium text-white tracking-wide">Interactive Planner</h3>
@@ -101,7 +105,7 @@ export function EMICalculator({
                   max={maxAmount}
                   step={10000}
                   onValueChange={(vals) => setAmount(vals[0])}
-                  className="py-1 [&_[role=slider]]:bg-blue-400 [&_[role=slider]]:border-blue-400 [&_[role=slider]]:shadow-[0_0_15px_rgba(96,165,250,0.5)] [&_.bg-primary]:bg-blue-500"
+                  className="py-1 [&_[role=slider]]:bg-blue-400 [&_[role=slider]]:border-blue-400 [&_[role=slider]]:shadow-[0_0_20px_rgba(96,165,250,0.8)] [&_.bg-primary]:bg-blue-500"
                 />
               </div>
             </div>
@@ -126,7 +130,7 @@ export function EMICalculator({
                 max={maxTenure}
                 step={1}
                 onValueChange={(vals) => setTenure(vals[0])}
-                className="py-1 [&_[role=slider]]:bg-cyan-400 [&_[role=slider]]:border-cyan-400 [&_[role=slider]]:shadow-[0_0_15px_rgba(34,211,238,0.5)] [&_.bg-primary]:bg-cyan-500"
+                className="py-1 [&_[role=slider]]:bg-cyan-400 [&_[role=slider]]:border-cyan-400 [&_[role=slider]]:shadow-[0_0_20px_rgba(34,211,238,0.8)] [&_.bg-primary]:bg-cyan-500"
               />
             </div>
 
@@ -151,7 +155,7 @@ export function EMICalculator({
                 max={36}
                 step={0.1}
                 onValueChange={(vals) => setRate(vals[0])}
-                className="py-1 [&_[role=slider]]:bg-indigo-400 [&_[role=slider]]:border-indigo-400 [&_[role=slider]]:shadow-[0_0_15px_rgba(129,140,248,0.5)] [&_.bg-primary]:bg-indigo-500"
+                className="py-1 [&_[role=slider]]:bg-indigo-400 [&_[role=slider]]:border-indigo-400 [&_[role=slider]]:shadow-[0_0_20px_rgba(129,140,248,0.8)] [&_.bg-primary]:bg-indigo-500"
               />
             </div>
           </div>
@@ -161,52 +165,74 @@ export function EMICalculator({
         <div className="lg:w-5/12 bg-gradient-to-b from-[#111622] to-[#0A0D14] p-8 md:p-14 flex flex-col justify-between relative">
           
           <div>
-            <div className="mb-12">
+            <div className="mb-10 text-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 text-xs font-medium mb-6">
                 <Fingerprint className="w-3.5 h-3.5 text-blue-400" /> Secure Calculation
               </div>
               <p className="text-slate-400 text-sm uppercase tracking-widest font-semibold mb-2">Est. Monthly EMI</p>
-              <div className="text-5xl md:text-7xl font-bold tracking-tighter text-white drop-shadow-[0_0_30px_rgba(96,165,250,0.3)]">
+              <div className="text-5xl md:text-6xl font-bold tracking-tighter text-white drop-shadow-[0_0_40px_rgba(96,165,250,0.4)]">
                 <span className="text-3xl text-slate-500 font-light mr-1">₹</span>
                 {emi.toLocaleString('en-IN', { maximumFractionDigits: 0 })}
               </div>
             </div>
 
-            {/* Glowing Data Bar */}
-            <div className="mb-10 p-6 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm">
-              <div className="flex justify-between text-sm mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.8)]" />
-                  <span className="text-slate-300">Principal</span>
-                </div>
-                <span className="font-semibold text-white">{formatCurrency(amount)}</span>
-              </div>
-              <div className="flex justify-between text-sm mb-5">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.8)]" />
-                  <span className="text-slate-300">Interest</span>
-                </div>
-                <span className="font-semibold text-white">{formatCurrency(totalInterest)}</span>
-              </div>
+            {/* Glowing Circular Data Ring */}
+            <div className="relative w-48 h-48 mx-auto mb-8 flex items-center justify-center group">
+              {/* Central glow */}
+              <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-3xl group-hover:bg-blue-500/30 transition-all duration-700" />
               
-              <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden flex">
-                <div 
-                  className="h-full bg-blue-500 rounded-full transition-all duration-700 relative" 
-                  style={{ width: `${principalPercent}%` }} 
-                >
-                  <div className="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-r from-transparent to-white/50" />
-                </div>
-                <div className="h-full bg-indigo-500 flex-1 transition-all duration-700" />
+              <svg className="w-full h-full transform -rotate-90 relative z-10 drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]" viewBox="0 0 100 100">
+                {/* Background ring (Interest) */}
+                <circle
+                  cx="50" cy="50" r="40"
+                  className="stroke-indigo-900/50"
+                  strokeWidth="8"
+                  fill="transparent"
+                />
+                {/* Foreground ring (Principal) */}
+                <circle
+                  cx="50" cy="50" r="40"
+                  className="stroke-blue-400 drop-shadow-[0_0_10px_rgba(96,165,250,1)] transition-all duration-1000 ease-out"
+                  strokeWidth="8"
+                  fill="transparent"
+                  strokeDasharray={circleCircumference}
+                  strokeDashoffset={strokeDashoffset}
+                  strokeLinecap="round"
+                />
+              </svg>
+              
+              {/* Inner Text */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-center z-20">
+                <span className="text-[10px] uppercase tracking-widest text-blue-300/80 font-bold mb-0.5">Principal</span>
+                <span className="text-2xl font-bold text-white drop-shadow-md">{Math.round(principalPercent)}%</span>
               </div>
             </div>
 
-            <div className="flex justify-between items-center py-4">
+            {/* Legend / Breakdown */}
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-blue-400 shadow-[0_0_10px_rgba(96,165,250,0.8)]" />
+                  <span className="text-slate-400 text-xs uppercase tracking-widest">Principal</span>
+                </div>
+                <div className="font-semibold text-white">{formatCurrency(amount)}</div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-sm text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <div className="w-2 h-2 rounded-full bg-indigo-900 shadow-[0_0_10px_rgba(49,46,129,0.8)]" />
+                  <span className="text-slate-400 text-xs uppercase tracking-widest">Interest</span>
+                </div>
+                <div className="font-semibold text-white">{formatCurrency(totalInterest)}</div>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center py-4 border-t border-white/10">
               <span className="text-slate-400 font-medium">Total Payable</span>
               <span className="text-2xl font-bold tracking-tight text-white">{formatCurrency(totalPayment)}</span>
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-8">
             <Link href="/apply">
               <Button className="relative w-full h-14 rounded-xl text-base font-bold tracking-wide text-white overflow-hidden group border border-white/10">
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 transition-transform duration-300 group-hover:scale-105" />
