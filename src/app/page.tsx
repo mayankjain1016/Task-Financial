@@ -109,15 +109,15 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {loanProducts.map((product, i) => (
               <FadeIn key={product.title} delay={i * 0.1}>
-                <div className="group h-full bg-card rounded-2xl border border-border hover:border-accent/50 p-6 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="group h-full bg-card rounded-2xl border border-border hover:border-accent/50 p-5 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                     {product.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{product.title}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-2">{product.description}</p>
-                  <div className="text-accent font-semibold mb-6 text-sm">{product.rateRange}</div>
-                  <Link href={product.href} className="inline-flex items-center text-sm font-medium text-primary hover:text-accent transition-colors">
-                    Learn more <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  <h3 className="text-lg font-semibold mb-2">{product.title}</h3>
+                  <p className="text-muted-foreground text-xs mb-3 leading-relaxed line-clamp-2">{product.description}</p>
+                  <div className="text-accent font-semibold mb-4 text-xs">{product.rateRange}</div>
+                  <Link href={product.href} className="inline-flex items-center text-xs font-medium text-primary hover:text-accent transition-colors">
+                    Learn more <ChevronRight className="w-3.5 h-3.5 ml-1 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </FadeIn>
@@ -171,7 +171,7 @@ export default function Home() {
             ].map((plan, i) => (
               <FadeIn key={plan.type} delay={i * 0.1}>
                 <div 
-                  className={`relative flex flex-col h-full bg-white rounded-3xl p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] ${
+                  className={`relative flex flex-col h-full bg-white rounded-3xl p-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] ${
                     plan.popular 
                       ? 'border-2 border-blue-500 shadow-[0_8px_30px_rgba(59,130,246,0.12)]' 
                       : 'border border-slate-200 shadow-sm'
@@ -183,44 +183,44 @@ export default function Home() {
                     </div>
                   )}
                   
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-8 ${plan.popular ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600'}`}>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-5 ${plan.popular ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600'}`}>
                     {plan.icon}
                   </div>
                   
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{plan.type}</h3>
-                  <div className="flex items-baseline gap-1 mb-8">
-                    <span className="text-3xl font-extrabold tracking-tight text-slate-900">{plan.rate}</span>
-                    <span className="text-sm font-medium text-slate-500">p.a.</span>
+                  <h3 className="text-lg font-bold text-slate-900 mb-1">{plan.type}</h3>
+                  <div className="flex items-baseline gap-1 mb-5">
+                    <span className="text-2xl font-extrabold tracking-tight text-slate-900">{plan.rate}</span>
+                    <span className="text-xs font-medium text-slate-500">p.a.</span>
                   </div>
 
-                  <div className="flex-1 space-y-4">
-                    <div className="flex items-center justify-between py-3 border-b border-slate-100">
-                      <span className="text-sm text-slate-500">Processing Fee</span>
-                      <span className="text-sm font-semibold text-slate-900">{plan.fee}</span>
+                  <div className="flex-1 space-y-3">
+                    <div className="flex items-center justify-between py-2 border-b border-slate-100">
+                      <span className="text-xs text-slate-500">Processing Fee</span>
+                      <span className="text-xs font-semibold text-slate-900">{plan.fee}</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-slate-100 mb-6">
-                      <span className="text-sm text-slate-500">Tenure</span>
-                      <span className="text-sm font-semibold text-slate-900">{plan.tenure}</span>
+                    <div className="flex items-center justify-between py-2 border-b border-slate-100 mb-4">
+                      <span className="text-xs text-slate-500">Tenure</span>
+                      <span className="text-xs font-semibold text-slate-900">{plan.tenure}</span>
                     </div>
 
-                    <ul className="space-y-3 mt-6">
+                    <ul className="space-y-2 mt-4">
                       {plan.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3">
-                          <Check className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
-                          <span className="text-sm text-slate-600">{feature}</span>
+                        <li key={idx} className="flex items-start gap-2">
+                          <Check className="w-3.5 h-3.5 text-blue-500 mt-0.5 shrink-0" />
+                          <span className="text-xs text-slate-600">{feature}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
                   <Button 
-                    className={`w-full mt-8 rounded-xl h-12 font-semibold transition-all ${
+                    className={`w-full mt-6 rounded-xl h-10 text-sm font-semibold transition-all ${
                       plan.popular 
                         ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg' 
                         : 'bg-slate-50 hover:bg-slate-100 text-slate-900 border border-slate-200'
                     }`}
                   >
-                    Apply Now <ArrowRight className="w-4 h-4 ml-2" />
+                    Apply Now <ArrowRight className="w-4 h-4 ml-1.5" />
                   </Button>
                 </div>
               </FadeIn>
@@ -263,21 +263,21 @@ export default function Home() {
             <div className="hidden md:block absolute top-10 left-[10%] right-[10%] h-[2px] bg-border z-0" />
             
             {[
-              { step: 1, title: "Apply Online", desc: "Fill our secure 2-minute application form.", icon: <CheckCircle2 className="w-8 h-8" /> },
-              { step: 2, title: "Verify KYC", desc: "Upload documents for instant digital verification.", icon: <FileCheck className="w-8 h-8" /> },
-              { step: 3, title: "Get Approved", desc: "Receive immediate approval based on your credit profile.", icon: <Clock className="w-8 h-8" /> },
-              { step: 4, title: "Funds Disbursed", desc: "Amount credited directly to your bank account.", icon: <Banknote className="w-8 h-8" /> },
+              { step: 1, title: "Apply Online", desc: "Fill our secure 2-minute application form.", icon: <CheckCircle2 className="w-6 h-6" /> },
+              { step: 2, title: "Verify KYC", desc: "Upload documents for instant digital verification.", icon: <FileCheck className="w-6 h-6" /> },
+              { step: 3, title: "Get Approved", desc: "Receive immediate approval based on your credit profile.", icon: <Clock className="w-6 h-6" /> },
+              { step: 4, title: "Funds Disbursed", desc: "Amount credited directly to your bank account.", icon: <Banknote className="w-6 h-6" /> },
             ].map((item, i) => (
               <FadeIn key={item.step} delay={i * 0.15}>
                 <div className="flex flex-col items-center text-center relative z-10 group">
-                  <div className="w-20 h-20 rounded-2xl bg-card border border-border flex items-center justify-center mb-6 shadow-sm group-hover:-translate-y-2 group-hover:border-accent group-hover:shadow-accent/20 transition-all duration-300 text-muted-foreground group-hover:text-accent">
+                  <div className="w-16 h-16 rounded-2xl bg-card border border-border flex items-center justify-center mb-4 shadow-sm group-hover:-translate-y-2 group-hover:border-accent group-hover:shadow-accent/20 transition-all duration-300 text-muted-foreground group-hover:text-accent">
                     {item.icon}
                   </div>
-                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-bold text-sm mb-4 absolute top-16 right-1/2 translate-x-12 translate-y-2 ring-4 ring-background">
+                  <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary text-primary-foreground font-bold text-xs mb-3 absolute top-12 right-1/2 translate-x-10 translate-y-1 ring-4 ring-background">
                     {item.step}
                   </div>
-                  <h3 className="text-xl font-heading font-bold mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg font-heading font-bold mb-1">{item.title}</h3>
+                  <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
                 </div>
               </FadeIn>
             ))}
