@@ -71,7 +71,7 @@ export function Header() {
     <header className={headerClasses}>
       <div className="container mx-auto px-6 h-14 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3 group">
-          <Image src="/Logo.png" alt="Task Financial Logo" width={160} height={40} className="object-contain group-hover:scale-105 transition-transform" unoptimized />
+          <Image src="/Logo.png" alt="Task Financial Logo" width={160} height={40} className="w-auto h-10 object-contain group-hover:scale-105 transition-transform" unoptimized />
           <span className="font-heading text-xl font-black tracking-tight text-slate-900">
             Task Financial
           </span>
