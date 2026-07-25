@@ -88,7 +88,7 @@ export function EMICalculator({
                 min={minAmount}
                 max={maxAmount}
                 step={10000}
-                onValueChange={(vals) => setAmount(vals[0])}
+                onValueChange={(vals) => setAmount(Array.isArray(vals) ? vals[0] : vals as number)}
                 className="py-4"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
@@ -116,7 +116,7 @@ export function EMICalculator({
                 min={minTenure}
                 max={maxTenure}
                 step={1}
-                onValueChange={(vals) => setTenure(vals[0])}
+                onValueChange={(vals) => setTenure(Array.isArray(vals) ? vals[0] : vals as number)}
                 className="py-4"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
@@ -145,7 +145,7 @@ export function EMICalculator({
                 min={5}
                 max={36}
                 step={0.1}
-                onValueChange={(vals) => setRate(vals[0])}
+                onValueChange={(vals) => setRate(Array.isArray(vals) ? vals[0] : vals as number)}
                 className="py-4"
               />
             </div>
