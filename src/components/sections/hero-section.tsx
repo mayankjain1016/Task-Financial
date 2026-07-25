@@ -125,17 +125,43 @@ export function HeroSection() {
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> +12.4%
               </div>
             </div>
-            {/* Minimalist Chart Mockup */}
-            <div className="relative z-10 w-full h-24 flex items-end gap-2 mt-4">
-              {[40, 30, 50, 45, 70, 65, 80, 95, 85, 100].map((h, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: 0.6 + (i * 0.05) }}
-                  className="flex-1 bg-gradient-to-t from-blue-600 to-blue-400 rounded-t-sm opacity-90 hover:opacity-100 transition-opacity"
+            {/* Premium Animated SVG Line Chart */}
+            <div className="relative z-10 w-full h-24 mt-4">
+              <svg className="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="rgba(59, 130, 246, 0.4)" />
+                    <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+                  </linearGradient>
+                </defs>
+                <motion.path
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: 1, opacity: 1 }}
+                  transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+                  d="M0,30 L0,20 Q10,10 20,25 T40,15 T60,20 T80,5 T100,10 L100,30 Z"
+                  fill="url(#chartGradient)"
                 />
-              ))}
+                <motion.path
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
+                  d="M0,20 Q10,10 20,25 T40,15 T60,20 T80,5 T100,10"
+                  fill="none"
+                  stroke="#3b82f6"
+                  strokeWidth="1.5"
+                  vectorEffect="non-scaling-stroke"
+                />
+                <motion.circle
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 2.5 }}
+                  cx="100" cy="10" r="2"
+                  fill="#fff"
+                  stroke="#3b82f6"
+                  strokeWidth="1"
+                  className="drop-shadow-[0_0_4px_rgba(59,130,246,0.8)]"
+                />
+              </svg>
             </div>
           </div>
 
@@ -148,8 +174,11 @@ export function HeroSection() {
               }}
             />
             <div className="relative z-10">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shadow-inner">
-                <Activity className="w-5 h-5 text-blue-600" />
+              <div className="relative w-12 h-12 mb-5">
+                <div className="absolute inset-0 bg-blue-500 rounded-xl opacity-20 animate-ping" />
+                <div className="relative w-full h-full rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shadow-inner z-10">
+                  <Activity className="w-5 h-5 text-blue-600" />
+                </div>
               </div>
               <h4 className="text-lg font-semibold text-slate-900 mb-1">Live Transfers</h4>
               <p className="text-sm text-slate-500 leading-relaxed">Global payouts processing seamlessly with zero latency.</p>
@@ -173,10 +202,24 @@ export function HeroSection() {
               <h4 className="text-2xl font-semibold text-slate-900 mb-2">99.999%</h4>
               <p className="text-sm text-slate-500 leading-relaxed">Uptime across 140+ global regions. Built for absolute reliability.</p>
             </div>
-            {/* Minimalist nodes graphic */}
-            <div className="relative z-10 w-full flex items-center gap-1 mt-4">
-               {[1,2,3,4,5,6].map((i) => (
-                  <div key={i} className={`h-1.5 flex-1 rounded-full ${i <= 5 ? 'bg-blue-500' : 'bg-slate-200'}`} />
+            {/* Connected Nodes Graphic */}
+            <div className="relative z-10 w-full h-12 mt-4 flex items-center justify-between px-2">
+               {/* Connecting Line */}
+               <div className="absolute left-4 right-4 h-[1px] bg-slate-200 top-1/2 -translate-y-1/2 z-0" />
+               <motion.div 
+                 initial={{ width: "0%" }}
+                 animate={{ width: "100%" }}
+                 transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                 className="absolute left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 -translate-y-1/2 z-0 opacity-50"
+               />
+               
+               {/* Nodes */}
+               {[1,2,3,4,5].map((i) => (
+                  <div key={i} className="relative z-10 w-3 h-3 rounded-full bg-white border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
+                    {i === 3 && (
+                      <div className="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-50" />
+                    )}
+                  </div>
                ))}
             </div>
           </div>
@@ -202,15 +245,17 @@ export function HeroSection() {
               
               {/* Code Snippet Mockup */}
               <div className="flex-1 w-full bg-white/5 rounded-2xl border border-white/10 p-5 font-mono text-xs text-slate-300 shadow-2xl backdrop-blur-md">
-                <div className="flex gap-1.5 mb-3">
+                <div className="flex gap-1.5 mb-4">
                   <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400/50" />
                   <div className="w-2.5 h-2.5 rounded-full bg-green-400/50" />
                 </div>
-                <p><span className="text-blue-400">import</span> {'{ TaskFinance }'} <span className="text-blue-400">from</span> <span className="text-green-300">'@task/sdk'</span>;</p>
-                <p className="mt-2"><span className="text-blue-400">const</span> client = <span className="text-blue-400">new</span> TaskFinance({'{'}</p>
-                <p className="pl-4">apiKey: process.env.TASK_KEY,</p>
-                <p>{'});'}</p>
+                <div className="space-y-1.5">
+                  <p><span className="text-pink-400">import</span> {'{ TaskFinance }'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@task/sdk'</span>;</p>
+                  <p className="mt-4"><span className="text-pink-400">const</span> <span className="text-blue-300">client</span> = <span className="text-pink-400">new</span> <span className="text-amber-200">TaskFinance</span>({'{'}</p>
+                  <p className="pl-4"><span className="text-sky-300">apiKey</span>: process.env.TASK_KEY,</p>
+                  <p className="flex items-center">{'});'} <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }} className="w-1.5 h-3.5 bg-blue-400 ml-1 inline-block" /></p>
+                </div>
               </div>
             </div>
           </div>
