@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Sparkles, Activity } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import ShapeGrid from "@/components/ShapeGrid";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -26,11 +27,19 @@ export function HeroSection() {
       className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] pt-24 pb-16 selection:bg-blue-500/30"
     >
       {/* Background - Ultra Clean Light Grid */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <ShapeGrid 
+          speed={0.5}
+          squareSize={40}
+          direction="diagonal"
+          borderColor="#00000008"
+          hoverFillColor="#3b82f610"
+          shape="square"
+          hoverTrailAmount={0}
+        />
         
         {/* Subtle glowing ambient light (Cyan/Blue) at top center */}
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] rounded-full bg-blue-400/10 blur-[120px] mix-blend-multiply" />
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] rounded-full bg-blue-400/10 blur-[120px] mix-blend-multiply pointer-events-none" />
       </div>
 
       <div className="container relative z-20 px-4 md:px-8 w-full max-w-[1200px] mx-auto flex flex-col items-center text-center">
