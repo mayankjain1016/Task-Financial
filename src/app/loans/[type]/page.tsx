@@ -191,7 +191,7 @@ export default async function LoanProductPage({ params }: { params: Promise<{ ty
       <section className="py-20 bg-primary/5">
         <div className="container mx-auto px-4 md:px-8 max-w-3xl">
           <h2 className="text-3xl font-heading font-bold text-center mb-12">Specific FAQs</h2>
-          <Accordion type="single" className="w-full">
+          <Accordion className="w-full">
             {loan.faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-border/50">
                 <AccordionTrigger className="text-lg font-medium hover:text-accent transition-colors text-left">

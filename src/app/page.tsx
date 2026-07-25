@@ -265,7 +265,7 @@ export default function Home() {
             </div>
           </FadeIn>
           <FadeIn delay={0.2}>
-            <Accordion type="single" className="w-full">
+            <Accordion className="w-full">
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className="border-border">
                   <AccordionTrigger className="text-lg font-medium hover:text-accent transition-colors text-left py-6">
