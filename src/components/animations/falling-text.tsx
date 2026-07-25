@@ -11,6 +11,7 @@ interface FallingTextProps {
   gravity?: number;
   mouseConstraintStiffness?: number;
   fontSize?: string;
+  itemClass?: string;
   highlightClass?: string;
 }
 
@@ -23,7 +24,8 @@ export const FallingText: React.FC<FallingTextProps> = ({
   gravity = 1,
   mouseConstraintStiffness = 0.2,
   fontSize = '1rem',
-  highlightClass = ''
+  itemClass = 'bg-white text-slate-900 border-slate-200',
+  highlightClass = 'text-primary bg-primary/10 border-primary/30'
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
@@ -39,7 +41,7 @@ export const FallingText: React.FC<FallingTextProps> = ({
       .map(word => {
         const isHighlighted = highlightWords.some(hw => word.startsWith(hw));
         return `<span
-          class="inline-block mx-[4px] my-[4px] px-6 py-3 rounded-2xl bg-white shadow-xl border border-border select-none cursor-grab active:cursor-grabbing font-bold tracking-tight text-foreground transition-shadow hover:shadow-primary/20 ${isHighlighted ? 'text-primary bg-primary/5 border-primary/20 ' + highlightClass : ''}"
+          class="inline-block mx-[4px] my-[4px] px-6 py-3 rounded-full shadow-[0_8px_16px_rgba(0,0,0,0.1)] border select-none cursor-grab active:cursor-grabbing font-bold tracking-tight transition-transform hover:scale-105 active:scale-95 ${itemClass} ${isHighlighted ? highlightClass : ''}"
         >
           ${word}
         </span>`;
@@ -47,7 +49,7 @@ export const FallingText: React.FC<FallingTextProps> = ({
       .join(' ');
 
     textRef.current.innerHTML = newHTML;
-  }, [text, highlightWords, highlightClass]);
+  }, [text, highlightWords, itemClass, highlightClass]);
 
   useEffect(() => {
     if (trigger === 'auto') {
@@ -116,10 +118,10 @@ export const FallingText: React.FC<FallingTextProps> = ({
 
       const body = Bodies.rectangle(x, y, rect.width, rect.height, {
         render: { fillStyle: 'transparent' },
-        restitution: 0.5, // bouncy
-        frictionAir: 0.02,
-        friction: 0.2,
-        chamfer: { radius: 10 }
+        restitution: 0.8, // highly bouncy and fun
+        frictionAir: 0.01,
+        friction: 0.1,
+        chamfer: { radius: 24 } // matches the rounded-full CSS
       });
       
       // Random initial rotation
