@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, useMotionValue, useSpring } from "fram
 import { ArrowRight, ShieldCheck, Zap, Sparkles, Fingerprint, Banknote, Landmark, CreditCard, ChevronRight, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { FallingText } from "@/components/animations/falling-text";
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -37,57 +38,57 @@ export function HeroSection() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-24 pb-12"
+      className="relative min-h-[70vh] w-full flex items-center justify-center overflow-hidden bg-[#030712] pt-28 pb-8"
     >
       {/* Background Ambient Glows & Blueprint Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 blueprint-grid opacity-[0.3]" />
+        <div className="absolute inset-0 blueprint-grid opacity-[0.1]" />
         
         {/* Massive Infinite Background Marquee (Outlined) */}
-        <div className="absolute top-1/3 -translate-y-1/2 left-0 w-full flex items-center overflow-hidden select-none z-0 mix-blend-multiply">
+        <div className="absolute top-1/3 -translate-y-1/2 left-0 w-full flex items-center overflow-hidden select-none z-0 mix-blend-screen">
           <motion.div
             animate={{ x: [0, "-50%"] }}
             transition={{ duration: 60, ease: "linear", repeat: Infinity }}
             className="flex whitespace-nowrap min-w-max"
           >
             {[1, 2].map((_, i) => (
-              <span key={i} className="text-[15rem] md:text-[25rem] font-heading font-black leading-none text-transparent [-webkit-text-stroke:4px_rgba(15,23,42,0.03)] tracking-tighter uppercase mr-12">
+              <span key={i} className="text-[15rem] md:text-[25rem] font-heading font-black leading-none text-transparent [-webkit-text-stroke:4px_rgba(255,255,255,0.03)] tracking-tighter uppercase mr-12">
                 TASK FINANCIAL • PREMIUM LENDING •
               </span>
             ))}
           </motion.div>
         </div>
         
-        {/* Animated Mesh Gradient Orbs */}
+        {/* Animated Mesh Gradient Orbs - More vibrant for dark mode */}
         <motion.div 
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
+            opacity: [0.4, 0.7, 0.4],
             x: [0, 50, 0],
             y: [0, 30, 0]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-blue-500/10 blur-[120px]" 
+          className="absolute -top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-blue-600/20 blur-[120px]" 
         />
         <motion.div 
           animate={{ 
             scale: [1, 1.5, 1],
-            opacity: [0.2, 0.5, 0.2],
+            opacity: [0.3, 0.6, 0.3],
             x: [0, -60, 0],
             y: [0, 40, 0]
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[30%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-cyan-400/10 blur-[100px]" 
+          className="absolute top-[30%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-indigo-500/20 blur-[100px]" 
         />
         <motion.div 
           animate={{ 
             scale: [1, 1.3, 1],
-            opacity: [0.1, 0.4, 0.1],
+            opacity: [0.2, 0.5, 0.2],
             x: [0, 40, 0],
             y: [0, -50, 0]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute -bottom-[20%] right-[20%] w-[40vw] h-[40vw] rounded-full bg-purple-500/10 blur-[120px]" 
+          className="absolute -bottom-[20%] right-[20%] w-[40vw] h-[40vw] rounded-full bg-purple-600/20 blur-[120px]" 
         />
       </div>
 
@@ -101,12 +102,12 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-md shadow-lg border border-white/50 text-xs font-bold tracking-widest text-slate-700 mb-8 uppercase"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(255,255,255,0.05)] border border-white/20 text-xs font-bold tracking-widest text-white mb-8 uppercase"
           >
             <Sparkles className="w-4 h-4 text-primary" /> Premium Financial Services
           </motion.div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1.05] mb-6 flex flex-col">
+          <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-heading font-black text-white tracking-tighter leading-[1.05] mb-6 flex flex-col">
             <div className="overflow-hidden">
               <motion.span 
                 initial={{ y: "100%" }}
@@ -122,7 +123,7 @@ export function HeroSection() {
                 initial={{ y: "100%" }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500 pb-2"
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-primary to-indigo-500 pb-2"
               >
                 Redefined.
               </motion.span>
@@ -133,7 +134,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="text-lg md:text-xl text-slate-600 font-medium max-w-xl leading-relaxed mb-10"
+            className="text-lg md:text-xl text-slate-300 font-medium max-w-xl leading-relaxed mb-10"
           >
             Access exclusive lending products, manage your wealth, and scale your business with absolute precision. All from your pocket.
           </motion.p>
@@ -145,18 +146,18 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
           >
             <Link href="/apply" className="w-full sm:w-auto group">
-              <Button size="lg" className="relative overflow-hidden w-full h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full text-base font-bold shadow-xl transition-all hover:scale-105 hover:shadow-slate-900/20">
+              <Button size="lg" className="relative overflow-hidden w-full h-14 px-8 bg-white hover:bg-slate-200 text-slate-900 rounded-full text-base font-bold shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-all hover:scale-105 hover:shadow-[0_0_60px_rgba(255,255,255,0.3)]">
                 <span className="relative z-10 flex items-center">Get Started <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
                 {/* Shiny Sweep Effect */}
                 <motion.div 
                   animate={{ x: ["-200%", "200%"] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-[150%] skew-x-12 z-0"
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-900/10 to-transparent w-[150%] skew-x-12 z-0"
                 />
               </Button>
             </Link>
             <Link href="/contact" className="w-full sm:w-auto group">
-              <Button size="lg" variant="outline" className="w-full h-14 px-8 bg-white/80 backdrop-blur-md hover:bg-white text-slate-900 border-slate-200 rounded-full text-base font-bold transition-all shadow-sm hover:shadow-md">
+              <Button size="lg" variant="outline" className="w-full h-14 px-8 bg-white/5 backdrop-blur-md hover:bg-white/10 text-white border-white/20 rounded-full text-base font-bold transition-all shadow-sm">
                 View Products <ChevronRight className="ml-1 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
@@ -166,16 +167,20 @@ export function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-12 flex items-center gap-6 text-sm text-slate-500 font-bold uppercase tracking-wider flex-wrap"
+            className="mt-8 w-full max-w-lg h-[180px] relative rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-xl shadow-[inset_0_2px_20px_rgba(255,255,255,0.02)] group"
           >
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-green-500" />
-              Bank-Grade Security
+            <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-500">
+              <p className="text-xs font-bold uppercase tracking-widest text-white bg-black/40 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/20 shadow-lg">Interact with features</p>
             </div>
-            <div className="flex items-center gap-2">
-              <Zap className="w-5 h-5 text-amber-500" /> 
-              Instant Approval
-            </div>
+            <FallingText 
+              text="Fast Secure Premium Wealth Loans Scale Trust Growth 24/7 Smart"
+              highlightWords={["Secure", "Premium", "Wealth", "Trust"]}
+              gravity={0.8}
+              fontSize="0.875rem"
+              trigger="auto"
+              backgroundColor="transparent"
+              highlightClass="!bg-primary/20 !border-primary/50 !text-white"
+            />
           </motion.div>
         </div>
 
@@ -186,7 +191,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10"
+            className="relative z-10 scale-[0.85] origin-center"
             style={{ rotateX, rotateY }}
           >
             <motion.div
@@ -196,7 +201,7 @@ export function HeroSection() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               {/* The iPhone Hardware */}
-              <div className="relative w-[320px] h-[650px] bg-slate-900 rounded-[3.5rem] border-[12px] border-slate-800 shadow-2xl shadow-primary/20 overflow-hidden flex flex-col transform-style-3d">
+              <div className="relative w-[320px] h-[650px] bg-slate-900 rounded-[3.5rem] border-[12px] border-slate-800 shadow-[0_0_60px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col transform-style-3d">
                 
                 {/* Realistic Glass Glare */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent w-[200%] -rotate-45 translate-x-[-50%] pointer-events-none z-40" />
@@ -234,7 +239,7 @@ export function HeroSection() {
                     initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
-                    className="w-full bg-gradient-to-br from-primary to-blue-700 rounded-[2rem] p-6 mb-8 shadow-xl shadow-primary/30 relative overflow-hidden group cursor-pointer"
+                    className="w-full bg-gradient-to-br from-primary to-indigo-700 rounded-[2rem] p-6 mb-8 shadow-xl shadow-primary/30 relative overflow-hidden group cursor-pointer"
                   >
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/20 rounded-full blur-xl -ml-10 -mb-10" />
@@ -309,21 +314,21 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, -15, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -right-8 top-[30%] bg-white p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-100 z-20 flex items-center gap-4"
+            className="absolute -right-8 top-[30%] bg-white/10 backdrop-blur-md p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/20 z-20 flex items-center gap-4"
           >
-            <div className="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center">
-              <CheckCircle2 className="w-6 h-6 text-green-500" />
+            <div className="w-12 h-12 rounded-full bg-green-500/20 border border-green-500/50 flex items-center justify-center">
+              <CheckCircle2 className="w-6 h-6 text-green-400" />
             </div>
             <div>
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-0.5">Loan Approved</p>
-              <p className="text-base font-black text-slate-900 tracking-tight">₹25,00,000</p>
+              <p className="text-[10px] text-slate-300 font-bold uppercase tracking-widest mb-0.5">Loan Approved</p>
+              <p className="text-base font-black text-white tracking-tight">₹25,00,000</p>
             </div>
           </motion.div>
 
           <motion.div
             animate={{ y: [0, 15, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -left-12 bottom-[25%] bg-slate-900 p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border border-slate-800 z-20 flex flex-col gap-2"
+            className="absolute -left-12 bottom-[25%] bg-black/40 backdrop-blur-md p-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-white/10 z-20 flex flex-col gap-2"
           >
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-primary" />
@@ -348,8 +353,8 @@ export function HeroSection() {
         transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center"
       >
-        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-4">Scroll to explore</p>
-        <div className="w-[1px] h-12 bg-slate-200 relative overflow-hidden">
+        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-4">Scroll to explore</p>
+        <div className="w-[1px] h-12 bg-white/10 relative overflow-hidden">
           <motion.div 
             animate={{ y: ["-100%", "200%"] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

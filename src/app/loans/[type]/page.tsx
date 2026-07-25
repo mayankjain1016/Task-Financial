@@ -119,16 +119,29 @@ export default async function LoanProductPage({ params }: { params: Promise<{ ty
 
   return (
     <div className="pt-20">
-      {/* Hero */}
-      <section className="bg-primary text-primary-foreground py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl text-center">
-          <h1 className="text-4xl md:text-6xl font-heading font-bold mb-6">{loan.title}</h1>
-          <p className="text-xl text-accent mb-6 font-medium italic">{loan.tagline}</p>
-          <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto mb-10">
+      {/* Premium Hero */}
+      <section className="relative overflow-hidden bg-[#0A0F1C] text-white py-24 md:py-32 border-b border-slate-800">
+        <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay pointer-events-none" />
+        
+        {/* Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-primary/20 blur-[120px] rounded-[100%] pointer-events-none" />
+
+        <div className="container relative z-10 mx-auto px-4 md:px-8 max-w-5xl text-center flex flex-col items-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-widest text-slate-300 mb-8 uppercase backdrop-blur-md">
+            Product Detail
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-heading font-black mb-6 tracking-tight">
+            {loan.title}
+          </h1>
+          <p className="text-xl md:text-2xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-primary mb-8 font-semibold tracking-wide">
+            {loan.tagline}
+          </p>
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-12 font-medium leading-relaxed">
             {loan.description}
           </p>
-          <Link href="/apply" className={buttonVariants({ size: "lg", className: "rounded-full bg-accent text-accent-foreground hover:bg-accent/90 h-14 px-8 text-lg" })}>
-            Apply Now
+          <Link href="/apply" className={buttonVariants({ size: "lg", className: "relative overflow-hidden group rounded-full bg-white text-slate-900 hover:bg-slate-100 h-14 px-10 text-base font-bold transition-all shadow-[0_0_40px_rgba(255,255,255,0.1)] hover:shadow-[0_0_60px_rgba(255,255,255,0.2)] hover:-translate-y-1" })}>
+            <span className="relative z-10">Start Your Application</span>
           </Link>
         </div>
       </section>
