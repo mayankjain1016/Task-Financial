@@ -101,165 +101,176 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        {/* BOTTOM: Spotlight Hover Grid Dashboard */}
+        {/* BOTTOM: Unified Application Dashboard Mockup */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-          className="w-full max-w-[1000px] grid grid-cols-1 md:grid-cols-3 gap-4 group/grid"
+          className="relative w-full max-w-[1100px] rounded-3xl bg-white border border-black/5 shadow-[0_20px_80px_rgb(0,0,0,0.07)] overflow-hidden group/dashboard transition-all duration-700 hover:shadow-[0_30px_100px_rgb(0,0,0,0.1)] flex flex-col"
         >
-          {/* Card 1: Main Metric */}
-          <div className="relative md:col-span-2 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
-            <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-              style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59,130,246,0.08), transparent 40%)`
-              }}
-            />
-            <div className="relative z-10 flex justify-between items-start">
+          {/* Magic Spotlight for the whole dashboard */}
+          <div 
+            className="absolute inset-0 opacity-0 group-hover/dashboard:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
+            style={{
+              background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59,130,246,0.04), transparent 40%)`
+            }}
+          />
+
+          {/* MacOS Window Header */}
+          <div className="relative z-10 w-full h-12 bg-slate-50/80 backdrop-blur-md border-b border-black/5 flex items-center px-4 justify-between">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-400 border border-red-500/20" />
+              <div className="w-3 h-3 rounded-full bg-amber-400 border border-amber-500/20" />
+              <div className="w-3 h-3 rounded-full bg-green-400 border border-green-500/20" />
+            </div>
+            <div className="text-[10px] font-medium text-slate-400 uppercase tracking-widest flex gap-4">
+              <span>TaskFinancial_Production</span>
+              <span>v2.0.4</span>
+            </div>
+            <div className="w-16" /> {/* Spacer to center the title */}
+          </div>
+
+          {/* Dashboard Body (Sidebar + Main View) */}
+          <div className="relative z-10 flex flex-col md:flex-row w-full flex-1 min-h-[450px]">
+            
+            {/* Left Sidebar */}
+            <div className="w-full md:w-64 bg-slate-50/50 border-r border-black/5 p-6 flex flex-col justify-between">
               <div>
-                <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">Total Capital</p>
-                <h3 className="text-4xl font-semibold text-slate-900 tracking-tight">$14,240,000.00</h3>
-              </div>
-              <div className="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium border border-green-100 flex items-center gap-1.5 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> +12.4%
-              </div>
-            </div>
-            {/* Premium Animated SVG Line Chart */}
-            <div className="relative z-10 w-full h-24 mt-4">
-              <svg className="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="rgba(59, 130, 246, 0.4)" />
-                    <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
-                  </linearGradient>
-                </defs>
-                <motion.path
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 1 }}
-                  transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
-                  d="M0,30 L0,20 Q10,10 20,25 T40,15 T60,20 T80,5 T100,10 L100,30 Z"
-                  fill="url(#chartGradient)"
-                />
-                <motion.path
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
-                  d="M0,20 Q10,10 20,25 T40,15 T60,20 T80,5 T100,10"
-                  fill="none"
-                  stroke="#3b82f6"
-                  strokeWidth="1.5"
-                  vectorEffect="non-scaling-stroke"
-                />
-                <motion.circle
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 2.5 }}
-                  cx="100" cy="10" r="2"
-                  fill="#fff"
-                  stroke="#3b82f6"
-                  strokeWidth="1"
-                  className="drop-shadow-[0_0_4px_rgba(59,130,246,0.8)]"
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* Card 2: Recent Activity */}
-          <div className="relative md:col-span-1 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
-             <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-              style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x - 666}px ${mousePosition.y}px, rgba(59,130,246,0.08), transparent 40%)` 
-              }}
-            />
-            <div className="relative z-10">
-              <div className="relative w-12 h-12 mb-5">
-                <div className="absolute inset-0 bg-blue-500 rounded-xl opacity-20 animate-ping" />
-                <div className="relative w-full h-full rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shadow-inner z-10">
-                  <Activity className="w-5 h-5 text-blue-600" />
-                </div>
-              </div>
-              <h4 className="text-lg font-semibold text-slate-900 mb-1">Live Transfers</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">Global payouts processing seamlessly with zero latency.</p>
-            </div>
-            <div className="relative z-10 w-full flex items-center justify-between py-3 border-t border-black/5 mt-2">
-               <span className="text-xs font-medium text-slate-400">Processing</span>
-               <span className="text-xs font-semibold text-slate-900">4,092 / sec</span>
-            </div>
-          </div>
-
-          {/* Card 3: Global Network */}
-          <div className="relative md:col-span-1 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
-             <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-              style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y - 276}px, rgba(59,130,246,0.08), transparent 40%)` 
-              }}
-            />
-            <div className="relative z-10">
-              <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-4">Infrastructure</p>
-              <h4 className="text-2xl font-semibold text-slate-900 mb-2">99.999%</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">Uptime across 140+ global regions. Built for absolute reliability.</p>
-            </div>
-            {/* Connected Nodes Graphic */}
-            <div className="relative z-10 w-full h-12 mt-4 flex items-center justify-between px-2">
-               {/* Connecting Line */}
-               <div className="absolute left-4 right-4 h-[1px] bg-slate-200 top-1/2 -translate-y-1/2 z-0" />
-               <motion.div 
-                 initial={{ width: "0%" }}
-                 animate={{ width: "100%" }}
-                 transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
-                 className="absolute left-4 right-4 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 -translate-y-1/2 z-0 opacity-50"
-               />
-               
-               {/* Nodes */}
-               {[1,2,3,4,5].map((i) => (
-                  <div key={i} className="relative z-10 w-3 h-3 rounded-full bg-white border-2 border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
-                    {i === 3 && (
-                      <div className="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-50" />
-                    )}
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-4">Views</p>
+                <div className="space-y-1">
+                  <div className="px-3 py-2 bg-white rounded-lg border border-black/5 shadow-sm text-sm font-semibold text-slate-800 flex items-center gap-2">
+                    <Activity className="w-4 h-4 text-blue-600" /> Overview
                   </div>
-               ))}
-            </div>
-          </div>
+                  <div className="px-3 py-2 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-100/50 hover:text-slate-800 transition-colors flex items-center gap-2 cursor-pointer">
+                     Transfers
+                  </div>
+                  <div className="px-3 py-2 rounded-lg text-sm font-medium text-slate-500 hover:bg-slate-100/50 hover:text-slate-800 transition-colors flex items-center gap-2 cursor-pointer">
+                     API Keys
+                  </div>
+                </div>
+              </div>
 
-          {/* Card 4: Code Integration */}
-          <div className="relative md:col-span-2 h-[260px] rounded-3xl bg-[#0A0A0A] border border-black/[0.04] shadow-[0_15px_40px_rgb(0,0,0,0.1)] overflow-hidden p-8 flex flex-col justify-center group/card transition-all duration-500 hover:-translate-y-1">
-            <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-              style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x - 333}px ${mousePosition.y - 276}px, rgba(255,255,255,0.07), transparent 40%)`
-              }}
-            />
-            <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-1">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-[10px] font-mono text-slate-300 mb-4 border border-white/5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> API Ready
-                </div>
-                <h4 className="text-xl font-semibold text-white mb-2">Deploy in minutes</h4>
-                <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
-                  Integrate our powerful SDKs directly into your codebase with just three lines of code.
-                </p>
-              </div>
-              
-              {/* Code Snippet Mockup */}
-              <div className="flex-1 w-full bg-white/5 rounded-2xl border border-white/10 p-5 font-mono text-xs text-slate-300 shadow-2xl backdrop-blur-md">
-                <div className="flex gap-1.5 mb-4">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400/50" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400/50" />
-                </div>
-                <div className="space-y-1.5">
-                  <p><span className="text-pink-400">import</span> {'{ TaskFinance }'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@task/sdk'</span>;</p>
-                  <p className="mt-4"><span className="text-pink-400">const</span> <span className="text-blue-300">client</span> = <span className="text-pink-400">new</span> <span className="text-amber-200">TaskFinance</span>({'{'}</p>
-                  <p className="pl-4"><span className="text-sky-300">apiKey</span>: process.env.TASK_KEY,</p>
-                  <p className="flex items-center">{'});'} <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }} className="w-1.5 h-3.5 bg-blue-400 ml-1 inline-block" /></p>
+              {/* Infrastructure Stats in Sidebar */}
+              <div className="mt-8">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-3">Infrastructure</p>
+                <h4 className="text-xl font-semibold text-slate-900 mb-1">99.999%</h4>
+                <p className="text-[10px] text-slate-500 leading-relaxed mb-3">Uptime across 140+ global regions.</p>
+                
+                {/* Connected Nodes Graphic */}
+                <div className="relative z-10 w-full h-8 flex items-center justify-between px-1">
+                  <div className="absolute left-2 right-2 h-[1px] bg-slate-200 top-1/2 -translate-y-1/2 z-0" />
+                  <motion.div 
+                    initial={{ width: "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 2, ease: "easeInOut", repeat: Infinity }}
+                    className="absolute left-2 right-2 h-[1px] bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 -translate-y-1/2 z-0 opacity-50"
+                  />
+                  {[1,2,3,4].map((i) => (
+                      <div key={i} className="relative z-10 w-2.5 h-2.5 rounded-full bg-white border-2 border-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.4)]">
+                        {i === 2 && <div className="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-50" />}
+                      </div>
+                  ))}
                 </div>
               </div>
             </div>
+
+            {/* Main Central View */}
+            <div className="flex-1 p-8 flex flex-col relative bg-white">
+              {/* Header of Main View */}
+              <div className="flex justify-between items-start mb-8">
+                <div>
+                  <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">Total Capital</p>
+                  <h3 className="text-5xl font-semibold text-slate-900 tracking-tight">$14,240,000.00</h3>
+                </div>
+                <div className="px-3 py-1.5 bg-green-50 text-green-600 rounded-full text-xs font-semibold border border-green-100 flex items-center gap-1.5 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> +12.4%
+                </div>
+              </div>
+
+              {/* Massive SVG Line Chart */}
+              <div className="relative w-full h-48 mb-8 flex-shrink-0">
+                <svg className="w-full h-full overflow-visible" viewBox="0 0 100 30" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="mainChartGradient" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stopColor="rgba(59, 130, 246, 0.3)" />
+                      <stop offset="100%" stopColor="rgba(59, 130, 246, 0)" />
+                    </linearGradient>
+                  </defs>
+                  <motion.path
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
+                    d="M0,30 L0,25 Q10,15 20,28 T40,20 T60,22 T80,10 T100,12 L100,30 Z"
+                    fill="url(#mainChartGradient)"
+                  />
+                  <motion.path
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 2.5, ease: "easeInOut", delay: 0.8 }}
+                    d="M0,25 Q10,15 20,28 T40,20 T60,22 T80,10 T100,12"
+                    fill="none"
+                    stroke="#3b82f6"
+                    strokeWidth="1.2"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                  <motion.circle
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 3.3 }}
+                    cx="100" cy="12" r="1.5"
+                    fill="#fff"
+                    stroke="#3b82f6"
+                    strokeWidth="0.8"
+                    className="drop-shadow-[0_0_6px_rgba(59,130,246,1)]"
+                  />
+                </svg>
+              </div>
+
+              {/* Bottom Row within Main View (Live Transfers & Code) */}
+              <div className="flex flex-col xl:flex-row gap-6 mt-auto">
+                
+                {/* Live Transfers Mini-Panel */}
+                <div className="flex-1 bg-slate-50/80 rounded-2xl p-5 border border-black/5 flex items-center gap-5">
+                  <div className="relative w-12 h-12 flex-shrink-0">
+                    <div className="absolute inset-0 bg-blue-500 rounded-xl opacity-20 animate-ping" />
+                    <div className="relative w-full h-full rounded-xl bg-white border border-blue-100 flex items-center justify-center shadow-sm z-10">
+                      <Activity className="w-5 h-5 text-blue-600" />
+                    </div>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-slate-900 mb-0.5">Live Transfers</h4>
+                    <p className="text-xs text-slate-500 mb-1">Global payouts running.</p>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Processing</span>
+                      <span className="text-sm font-bold text-slate-900">4,092 / sec</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Code Terminal Mini-Panel */}
+                <div className="flex-[1.5] bg-[#0A0A0A] rounded-2xl p-5 border border-black/10 shadow-inner font-mono text-[10px] sm:text-xs text-slate-300 relative overflow-hidden group">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="flex justify-between items-center mb-3">
+                    <div className="flex gap-1.5">
+                      <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-amber-400/50" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-green-400/50" />
+                    </div>
+                    <div className="px-2 py-0.5 rounded bg-white/10 text-[9px] text-cyan-300 border border-white/5 uppercase tracking-widest">
+                      API Ready
+                    </div>
+                  </div>
+                  <div className="space-y-1">
+                    <p><span className="text-pink-400">import</span> {'{ TaskFinance }'} <span className="text-pink-400">from</span> <span className="text-emerald-300">'@task/sdk'</span>;</p>
+                    <p className="mt-2"><span className="text-pink-400">const</span> <span className="text-blue-300">client</span> = <span className="text-pink-400">new</span> <span className="text-amber-200">TaskFinance</span>({'{'}</p>
+                    <p className="pl-4"><span className="text-sky-300">apiKey</span>: process.env.TASK_KEY,</p>
+                    <p className="flex items-center">{'});'} <motion.span animate={{ opacity: [1, 0, 1] }} transition={{ duration: 1, repeat: Infinity }} className="w-1.5 h-3.5 bg-blue-400 ml-1 inline-block" /></p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          
         </motion.div>
 
       </div>
