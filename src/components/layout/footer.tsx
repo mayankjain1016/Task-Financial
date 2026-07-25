@@ -13,7 +13,7 @@ export function Footer() {
           {/* Brand & Trust */}
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2 group">
-              <Image src="/Logo.png" alt="Task Financial Logo" width={160} height={48} className="object-contain max-h-12 w-auto" unoptimized />
+              <Image src="/Logo.png" alt="Task Financial Logo" width={160} height={48} className="object-contain" unoptimized />
               <span className="font-heading text-2xl font-bold tracking-tight">
                 Task Financial
               </span>
