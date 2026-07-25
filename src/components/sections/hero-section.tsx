@@ -23,31 +23,31 @@ export function HeroSection() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#000000] pt-24 pb-16 selection:bg-blue-500/30"
+      className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#FAFAFA] pt-24 pb-16 selection:bg-blue-500/30"
     >
-      {/* Background - Deep Technical Dark Grid */}
+      {/* Background - Ultra Clean Light Grid */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
         
         {/* Subtle glowing ambient light (Cyan/Blue) at top center */}
-        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] rounded-full bg-blue-600/10 blur-[120px]" />
+        <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[60vw] h-[40vw] rounded-full bg-blue-400/10 blur-[120px] mix-blend-multiply" />
       </div>
 
       <div className="container relative z-20 px-4 md:px-8 w-full max-w-[1200px] mx-auto flex flex-col items-center text-center">
         
-        {/* TOP: Ultra-Refined Dark Typography */}
+        {/* TOP: Ultra-Refined Light Typography */}
         <div className="flex flex-col items-center w-full z-30 pt-4 mb-12">
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-medium tracking-widest text-slate-300 mb-10 overflow-hidden"
+            className="group relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/50 backdrop-blur-xl border border-black/5 text-[11px] font-medium tracking-widest text-slate-600 mb-10 overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.03)]"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-blue-500/10 to-blue-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]" /> Task Financial v2.0
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]" /> Task Financial v2.0
           </motion.div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-white leading-[1.05] mb-6 max-w-4xl">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-slate-900 leading-[1.05] mb-6 max-w-4xl drop-shadow-sm">
             <motion.span 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-200 via-blue-400 to-cyan-400"
+              className="block text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-blue-700 to-blue-500"
             >
               for modern scale.
             </motion.span>
@@ -70,7 +70,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-xl text-slate-400 font-normal leading-relaxed max-w-2xl mb-10"
+            className="text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl mb-10"
           >
             A seamlessly integrated stack designed with absolute precision. Manage capital, issue cards, and scale operations instantly.
           </motion.p>
@@ -82,18 +82,17 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
             <Link href="/apply">
-              <Button size="lg" className="h-12 px-8 bg-white hover:bg-slate-200 text-black rounded-full text-sm font-semibold transition-all hover:scale-[1.02]">
+              <Button size="lg" className="h-12 px-8 bg-black hover:bg-slate-800 text-white rounded-full text-sm font-semibold shadow-[0_8px_20px_rgba(0,0,0,0.1)] transition-all hover:scale-[1.02] hover:shadow-[0_12px_25px_rgba(0,0,0,0.15)]">
                 Start Building <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             <Link href="/docs">
-              <Button size="lg" variant="outline" className="h-12 px-8 bg-transparent hover:bg-white/5 text-white border-white/20 rounded-full text-sm font-medium transition-all">
+              <Button size="lg" variant="outline" className="h-12 px-8 bg-white/50 hover:bg-white text-slate-700 border-black/10 rounded-full text-sm font-medium transition-all shadow-sm backdrop-blur-md">
                 Read the Docs
               </Button>
             </Link>
           </motion.div>
         </div>
-
 
       </div>
     </section>
