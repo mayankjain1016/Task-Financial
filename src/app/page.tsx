@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Users, HandCoins, Landmark, Building2, CheckCircle2, ChevronRight, FileCheck, Banknote, Clock, Sparkles, ArrowRight, Check } from "lucide-react";
+import { Users, HandCoins, Landmark, Building2, CheckCircle2, ChevronRight, FileCheck, Banknote, Clock, Sparkles, ArrowRight, Check, Calculator } from "lucide-react";
 import { EMICalculator } from "@/components/widgets/emi-calculator";
 import { TrustBadges } from "@/components/widgets/trust-badges";
 import { LoanProductCard } from "@/components/widgets/loan-product-card";
@@ -230,12 +230,17 @@ export default function Home() {
       </section>
 
       {/* EMI Calculator */}
-      <section className="py-32 relative">
+      <section className="py-24 bg-slate-50/50 border-y border-slate-100 relative">
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <FadeIn>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4">Calculate Your EMI</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-semibold tracking-widest uppercase mb-6 border border-blue-100">
+                <Calculator className="w-3.5 h-3.5" /> Interactive Tool
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold tracking-tight mb-6 text-slate-900">
+                Calculate Your EMI
+              </h2>
+              <p className="text-lg md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed">
                 Use our real-time interactive calculator to plan your finances effectively before applying.
               </p>
             </div>
