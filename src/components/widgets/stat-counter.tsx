@@ -39,8 +39,8 @@ export function StatCounter({ value, label, prefix = "", suffix = "" }: StatCoun
   }, [springValue]);
 
   return (
-    <div className="flex flex-col items-center text-center p-6 border rounded-2xl bg-card shadow-sm hover:shadow-md transition-shadow">
-      <div ref={ref} className="text-4xl md:text-5xl font-heading font-bold text-primary mb-2 flex items-center justify-center">
+    <div className="flex flex-col items-center text-center py-2 px-4 transition-transform hover:scale-[1.02]">
+      <div ref={ref} className="text-3xl md:text-4xl font-heading font-bold text-primary mb-1 flex items-center justify-center">
         {prefix && <span>{prefix}</span>}
         <span className="counter-val">0</span>
         {suffix && <span>{suffix}</span>}

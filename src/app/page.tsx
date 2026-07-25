@@ -79,7 +79,7 @@ export default function Home() {
       <HeroSection />
 
       {/* Trust Strip - Overlapping the Hero */}
-      <div className="relative z-20 container mx-auto px-4 max-w-4xl -mt-16 mb-24">
+      <div className="relative z-20 container mx-auto px-4 max-w-6xl -mt-16 mb-24">
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
