@@ -109,11 +109,11 @@ export function HeroSection() {
           className="w-full max-w-[1000px] grid grid-cols-1 md:grid-cols-3 gap-4 group/grid"
         >
           {/* Card 1: Main Metric */}
-          <div className="relative md:col-span-2 h-[280px] rounded-3xl bg-white border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="relative md:col-span-2 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
             <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"
+              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
               style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59,130,246,0.06), transparent 40%)`
+                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59,130,246,0.08), transparent 40%)`
               }}
             />
             <div className="relative z-10 flex justify-between items-start">
@@ -121,8 +121,8 @@ export function HeroSection() {
                 <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">Total Capital</p>
                 <h3 className="text-4xl font-semibold text-slate-900 tracking-tight">$14,240,000.00</h3>
               </div>
-              <div className="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium border border-green-100 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> +12.4%
+              <div className="px-3 py-1 bg-green-50 text-green-600 rounded-full text-xs font-medium border border-green-100 flex items-center gap-1.5 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> +12.4%
               </div>
             </div>
             {/* Minimalist Chart Mockup */}
@@ -140,26 +140,81 @@ export function HeroSection() {
           </div>
 
           {/* Card 2: Recent Activity */}
-          <div className="relative md:col-span-1 h-[280px] rounded-3xl bg-white border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1">
+          <div className="relative md:col-span-1 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
              <div 
-              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none"
+              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
               style={{
-                background: `radial-gradient(600px circle at ${mousePosition.x - 666}px ${mousePosition.y}px, rgba(59,130,246,0.06), transparent 40%)` // Offset x by preceding card widths roughly for continuous effect
+                background: `radial-gradient(600px circle at ${mousePosition.x - 666}px ${mousePosition.y}px, rgba(59,130,246,0.08), transparent 40%)` 
               }}
             />
             <div className="relative z-10">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-6">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mb-5 shadow-inner">
                 <Activity className="w-5 h-5 text-blue-600" />
               </div>
               <h4 className="text-lg font-semibold text-slate-900 mb-1">Live Transfers</h4>
               <p className="text-sm text-slate-500 leading-relaxed">Global payouts processing seamlessly with zero latency.</p>
             </div>
-            <div className="relative z-10 w-full flex items-center justify-between py-3 border-t border-black/5 mt-4">
+            <div className="relative z-10 w-full flex items-center justify-between py-3 border-t border-black/5 mt-2">
                <span className="text-xs font-medium text-slate-400">Processing</span>
                <span className="text-xs font-semibold text-slate-900">4,092 / sec</span>
             </div>
           </div>
 
+          {/* Card 3: Global Network */}
+          <div className="relative md:col-span-1 h-[260px] rounded-3xl bg-white/60 backdrop-blur-xl border border-black/[0.04] shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden p-8 flex flex-col justify-between group/card transition-all duration-500 hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:-translate-y-1 hover:bg-white">
+             <div 
+              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+              style={{
+                background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y - 276}px, rgba(59,130,246,0.08), transparent 40%)` 
+              }}
+            />
+            <div className="relative z-10">
+              <p className="text-xs font-medium text-slate-400 uppercase tracking-widest mb-4">Infrastructure</p>
+              <h4 className="text-2xl font-semibold text-slate-900 mb-2">99.999%</h4>
+              <p className="text-sm text-slate-500 leading-relaxed">Uptime across 140+ global regions. Built for absolute reliability.</p>
+            </div>
+            {/* Minimalist nodes graphic */}
+            <div className="relative z-10 w-full flex items-center gap-1 mt-4">
+               {[1,2,3,4,5,6].map((i) => (
+                  <div key={i} className={`h-1.5 flex-1 rounded-full ${i <= 5 ? 'bg-blue-500' : 'bg-slate-200'}`} />
+               ))}
+            </div>
+          </div>
+
+          {/* Card 4: Code Integration */}
+          <div className="relative md:col-span-2 h-[260px] rounded-3xl bg-[#0A0A0A] border border-black/[0.04] shadow-[0_15px_40px_rgb(0,0,0,0.1)] overflow-hidden p-8 flex flex-col justify-center group/card transition-all duration-500 hover:-translate-y-1">
+            <div 
+              className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
+              style={{
+                background: `radial-gradient(600px circle at ${mousePosition.x - 333}px ${mousePosition.y - 276}px, rgba(255,255,255,0.07), transparent 40%)`
+              }}
+            />
+            <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex-1">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-white/10 text-[10px] font-mono text-slate-300 mb-4 border border-white/5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> API Ready
+                </div>
+                <h4 className="text-xl font-semibold text-white mb-2">Deploy in minutes</h4>
+                <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+                  Integrate our powerful SDKs directly into your codebase with just three lines of code.
+                </p>
+              </div>
+              
+              {/* Code Snippet Mockup */}
+              <div className="flex-1 w-full bg-white/5 rounded-2xl border border-white/10 p-5 font-mono text-xs text-slate-300 shadow-2xl backdrop-blur-md">
+                <div className="flex gap-1.5 mb-3">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400/50" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400/50" />
+                </div>
+                <p><span className="text-blue-400">import</span> {'{ TaskFinance }'} <span className="text-blue-400">from</span> <span className="text-green-300">'@task/sdk'</span>;</p>
+                <p className="mt-2"><span className="text-blue-400">const</span> client = <span className="text-blue-400">new</span> TaskFinance({'{'}</p>
+                <p className="pl-4">apiKey: process.env.TASK_KEY,</p>
+                <p>{'});'}</p>
+              </div>
+            </div>
+          </div>
+          
         </motion.div>
 
       </div>
