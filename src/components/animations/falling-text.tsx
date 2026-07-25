@@ -155,7 +155,7 @@ export const FallingText: React.FC<FallingTextProps> = ({
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {
-        stiffness: mouseConstraintStiffness,
+        stiffness: 0.1, // Softer spring for better dragging feel
         render: { visible: false }
       }
     });
@@ -179,7 +179,35 @@ export const FallingText: React.FC<FallingTextProps> = ({
     };
     updateLoop();
 
+    // The Explosion Effect
+    const handleCanvasClick = (e: MouseEvent) => {
+      if (!containerRef.current || !engine) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      const explosionForce = 0.08; // Huge blast force
+
+      wordBodies.forEach(({ body }) => {
+        const dx = body.position.x - mouseX;
+        const dy = body.position.y - mouseY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance > 0 && distance < 400) {
+           const forceMagnitude = explosionForce * (1 - distance / 400);
+           Matter.Body.applyForce(body, body.position, {
+             x: (dx / distance) * forceMagnitude,
+             y: (dy / distance) * forceMagnitude
+           });
+        }
+      });
+    };
+
+    const containerEl = containerRef.current;
+    containerEl.addEventListener('click', handleCanvasClick);
+
     return () => {
+      containerEl.removeEventListener('click', handleCanvasClick);
       Render.stop(render);
       Runner.stop(runner);
       if (render.canvas && canvasContainerRef.current) {

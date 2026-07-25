@@ -188,26 +188,26 @@ export function HeroSection() {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0, y: [10, -10, 10] }}
               transition={{ opacity: { duration: 0.8, delay: 0.8 }, y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 } }}
-              className="absolute z-40 -right-8 bottom-[15%] bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-[0_20px_60px_rgba(37,99,235,0.15)] border border-white w-72 transform translate-z-[80px]"
+              className="absolute z-40 -right-8 bottom-[15%] bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-[0_20px_60px_rgba(37,99,235,0.15)] border border-white w-80 transform translate-z-[80px]"
             >
               <div className="flex justify-between items-center mb-3">
                 <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Active Assets</p>
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               </div>
               {/* Mini Interactive Sandbox */}
-              <div className="w-full h-32 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden relative shadow-inner">
-                <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                   <p className="text-[10px] text-blue-600 font-bold tracking-widest uppercase bg-white/80 px-2 py-1 rounded">Play</p>
+              <div className="w-full h-40 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden relative shadow-inner group">
+                <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                   <p className="text-[11px] text-blue-600 font-bold tracking-widest uppercase bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-md shadow-sm border border-blue-100 animate-bounce">Click to Explode!</p>
                 </div>
                 <FallingText 
-                  text="Apple NVDA BTC Gold Cash Bonds"
-                  highlightWords={["Apple", "NVDA", "BTC"]}
+                  text="🍎Apple 🟩NVDA ₿BTC 💰Gold 💵Cash 📜Bonds 🚀Scale"
+                  highlightWords={["🍎Apple", "🟩NVDA", "₿BTC"]}
                   gravity={0.5}
-                  fontSize="0.65rem"
+                  fontSize="0.85rem"
                   trigger="auto"
                   backgroundColor="transparent"
-                  itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
-                  highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-md"
+                  itemClass="bg-white text-slate-700 border-slate-200 shadow-sm hover:scale-110 hover:z-50 transition-transform cursor-pointer font-bold px-3 py-1.5"
+                  highlightClass="!bg-blue-600 !border-blue-500 !text-white !shadow-[0_8px_20px_rgba(37,99,235,0.4)]"
                 />
               </div>
             </motion.div>
