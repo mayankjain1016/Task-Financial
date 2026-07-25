@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowRight, Sparkles, Wifi, Activity } from "lucide-react";
+import { ArrowRight, Sparkles, Activity, Banknote, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FallingText } from "@/components/animations/falling-text";
@@ -34,180 +34,195 @@ export function HeroSection() {
     <section 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className="relative min-h-[75vh] w-full flex flex-col items-center justify-center overflow-hidden bg-white pt-24 pb-8 perspective-[2000px]"
+      className="relative min-h-[85vh] w-full flex items-center justify-center overflow-hidden bg-slate-50 pt-20 pb-12 perspective-[2000px]"
     >
-      {/* Complex Liquid Background & Grids */}
+      {/* Background - Stripe-style Slanted Mesh */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 blueprint-grid opacity-[0.2]" />
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay" />
+        {/* Massive slanted background block */}
+        <div className="absolute top-0 left-0 w-[150vw] h-[80vh] bg-white -skew-y-[8deg] origin-top-left shadow-[0_40px_100px_rgba(0,0,0,0.02)] z-0" />
         
-        {/* Dynamic Mesh Orbs */}
+        {/* Subtle background grid on the slate-50 area */}
+        <div className="absolute inset-0 blueprint-grid opacity-[0.1]" />
+
+        {/* Ambient Glowing Orbs behind the Right Cluster */}
         <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.4, 0.6, 0.4], x: [0, 100, 0], y: [0, -50, 0] }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3], x: [0, 50, 0] }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] rounded-full bg-blue-500/15 blur-[120px]" 
+          className="absolute top-[20%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-blue-400/20 blur-[120px] z-10" 
         />
         <motion.div 
-          animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.5, 0.3], x: [0, -100, 0], y: [0, 100, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute top-[20%] -right-[10%] w-[60vw] h-[60vw] rounded-full bg-cyan-400/15 blur-[140px]" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80vw] h-[30vw] rounded-full bg-indigo-500/10 blur-[100px]" 
+          animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2], y: [0, -50, 0] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[10%] right-[30%] w-[40vw] h-[40vw] rounded-full bg-cyan-300/20 blur-[100px] z-10" 
         />
       </div>
 
-      <div className="container relative z-10 px-4 md:px-8 w-full max-w-7xl mx-auto flex flex-col pt-8">
+      <div className="container relative z-20 px-4 md:px-8 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-8 pt-8">
         
-        {/* Bento Grid Container - Tighter Height */}
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-4 w-full h-[550px]">
-          
-          {/* Card 1: Main Typography (Spans 2 columns) */}
+        {/* LEFT COLUMN: Clean, Massive Typography */}
+        <div className="flex-1 flex flex-col items-start text-left max-w-xl z-30">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="md:col-span-2 md:row-span-1 rounded-[2rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 flex flex-col justify-center relative overflow-hidden group"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 shadow-sm border border-blue-100 text-[10px] font-black tracking-widest text-blue-600 mb-8 uppercase"
           >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 blur-3xl -mr-20 -mt-20 rounded-full group-hover:scale-150 transition-transform duration-1000" />
-            
-            <motion.div 
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 w-max shadow-sm border border-blue-100/50 text-[9px] font-black tracking-[0.2em] text-blue-600 mb-6 uppercase"
-            >
-              <Sparkles className="w-3 h-3 text-blue-500" /> Task Financial Platform
-            </motion.div>
-
-            <h1 className="text-4xl lg:text-[3.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1.05] mb-4">
-              Banking, <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-500">
-                Redefined.
-              </span>
-            </h1>
-
-            <p className="text-base text-slate-600 font-medium max-w-md leading-relaxed mb-6">
-              Access exclusive lending products, manage your wealth, and scale your business with absolute precision.
-            </p>
-
-            <div className="flex gap-3">
-              <Link href="/apply">
-                <Button size="default" className="h-12 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold shadow-xl shadow-blue-600/30 transition-all hover:scale-105">
-                  Get Started <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Link href="/products">
-                <Button size="default" variant="outline" className="h-12 px-6 bg-white hover:bg-blue-50 text-blue-700 border-blue-200 rounded-full font-bold transition-all shadow-sm">
-                  View Products
-                </Button>
-              </Link>
-            </div>
+            <Sparkles className="w-3 h-3 text-blue-500" /> Premium Financial Infrastructure
           </motion.div>
 
-          {/* Card 2: 3D Holographic Credit Card (Spans 1 column, 2 rows) */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="md:col-span-1 md:row-span-2 rounded-[2.5rem] bg-gradient-to-b from-slate-900 to-blue-950 p-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[0_20px_60px_rgba(15,23,42,0.4)] perspective-[1000px]"
-          >
-            {/* Dark background details */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-30 mix-blend-overlay" />
-            <div className="absolute top-0 right-0 w-full h-1/2 bg-gradient-to-b from-blue-500/20 to-transparent blur-3xl" />
-            
-            <div className="w-full flex justify-between items-center mb-10 relative z-10">
-              <h4 className="font-bold text-white text-lg">Premium Card</h4>
-              <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.8)]" />
+          <h1 className="text-5xl md:text-6xl lg:text-[5.5rem] font-heading font-black text-slate-900 tracking-tighter leading-[1.05] mb-6 flex flex-col">
+            <div className="overflow-hidden">
+              <motion.span 
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                className="inline-block"
+              >
+                Banking,
+              </motion.span>
             </div>
+            <div className="overflow-hidden">
+              <motion.span 
+                initial={{ y: "100%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-500 to-cyan-500 pb-2"
+              >
+                Redefined.
+              </motion.span>
+            </div>
+          </h1>
 
-            {/* The 3D Interactive Card */}
-            <motion.div 
-              style={{ rotateX, rotateY }}
-              className="w-full aspect-[2/3] max-w-[280px] rounded-3xl bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md border border-white/20 p-6 flex flex-col justify-between relative transform-style-3d shadow-2xl group cursor-pointer"
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="text-lg md:text-xl text-slate-600 font-medium leading-relaxed mb-10"
+          >
+            Access exclusive lending products, manage your wealth, and scale your business with absolute precision. Built for the modern enterprise.
+          </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+            className="flex gap-4 w-full sm:w-auto"
+          >
+            <Link href="/apply">
+              <Button size="lg" className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-base font-bold shadow-[0_10px_30px_rgba(37,99,235,0.3)] transition-all hover:scale-105 hover:shadow-[0_15px_40px_rgba(37,99,235,0.4)] relative overflow-hidden group">
+                <span className="relative z-10 flex items-center">Start Building <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" /></span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent w-[150%] skew-x-12 animate-[sweep_3s_ease-in-out_infinite] z-0 pointer-events-none" />
+              </Button>
+            </Link>
+            <Link href="/contact">
+              <Button size="lg" variant="outline" className="h-14 px-8 bg-white hover:bg-slate-50 text-slate-700 border-slate-200 rounded-full text-base font-bold transition-all shadow-sm">
+                Contact Sales
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* RIGHT COLUMN: The Floating 3D Cluster */}
+        <div className="flex-1 relative w-full h-[600px] flex items-center justify-center transform-style-3d z-30">
+          
+          <motion.div 
+            style={{ rotateX, rotateY }}
+            className="relative w-full h-full flex items-center justify-center transform-style-3d"
+          >
+            {/* 1. Main Dashboard Mockup (Tilted in 3D) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 50 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+              className="absolute z-20 w-[400px] h-[550px] bg-white/80 backdrop-blur-2xl rounded-3xl border border-white/60 shadow-[0_30px_100px_rgba(15,23,42,0.1)] overflow-hidden flex flex-col transform rotate-y-[-10deg] rotate-x-[5deg]"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-[sweep_2s_ease-in-out_infinite] pointer-events-none rounded-3xl z-40" />
-              
-              <div className="w-full flex justify-between items-start z-10">
-                <div className="w-12 h-8 rounded bg-white/20 backdrop-blur-sm" />
-                <Wifi className="w-6 h-6 text-white/50 rotate-90" />
+              <div className="w-full h-12 bg-slate-50/50 border-b border-slate-100 flex items-center px-4 gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-400" />
+                <div className="w-3 h-3 rounded-full bg-amber-400" />
+                <div className="w-3 h-3 rounded-full bg-green-400" />
               </div>
-
-              <div className="z-10">
-                <p className="text-white/60 text-[10px] font-bold uppercase tracking-widest mb-2">Total Balance</p>
-                <h3 className="text-3xl font-black text-white tracking-tighter">₹12,45,000</h3>
-              </div>
-
-              <div className="w-full flex justify-between items-end z-10">
-                <p className="text-white font-bold tracking-widest">**** **** **** 4092</p>
-                <div className="flex -space-x-2">
-                  <div className="w-6 h-6 rounded-full bg-red-500/80 mix-blend-screen" />
-                  <div className="w-6 h-6 rounded-full bg-yellow-500/80 mix-blend-screen" />
+              <div className="flex-1 p-6 flex flex-col gap-4">
+                <div className="w-full flex justify-between items-center mb-2">
+                  <div className="w-24 h-4 bg-slate-200 rounded" />
+                  <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"><Activity className="w-4 h-4" /></div>
+                </div>
+                <div className="w-48 h-10 bg-slate-100 rounded-lg mb-4" />
+                <div className="flex gap-4 h-32">
+                  <div className="flex-1 bg-blue-50 rounded-xl" />
+                  <div className="flex-1 bg-indigo-50 rounded-xl" />
+                </div>
+                <div className="flex-1 bg-slate-50 rounded-xl mt-2 border border-slate-100 overflow-hidden flex items-end px-4 gap-2 pb-2">
+                  {/* Fake Bar Chart */}
+                  {[40, 70, 45, 90, 65, 100].map((h, i) => (
+                    <motion.div 
+                      key={i}
+                      initial={{ height: 0 }}
+                      animate={{ height: `${h}%` }}
+                      transition={{ delay: 0.8 + (i * 0.1), duration: 0.8 }}
+                      className="flex-1 bg-blue-500 rounded-t-md"
+                    />
+                  ))}
                 </div>
               </div>
             </motion.div>
 
-            <p className="text-blue-200/60 text-xs font-semibold mt-10 tracking-widest uppercase relative z-10">Hover to rotate</p>
-          </motion.div>
-
-          {/* Card 3: Interactive Physics Sandbox */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-            className="md:col-span-1 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 relative overflow-hidden group"
-          >
-            <div className="flex justify-between items-center mb-4 relative z-10">
-              <h4 className="font-bold text-slate-900">Portfolio Assets</h4>
-              <div className="px-3 py-1 rounded bg-blue-50 text-[10px] font-bold text-blue-600 tracking-widest uppercase">Interactive</div>
-            </div>
-            
-            <div className="absolute inset-0 top-16 bottom-4 left-4 right-4 bg-slate-50/50 rounded-2xl border border-slate-100 overflow-hidden shadow-inner">
-              <FallingText 
-                text="Apple Tesla NVDA BTC Gold Bonds Cash Scale Growth"
-                highlightWords={["Apple", "NVDA", "BTC"]}
-                gravity={0.8}
-                fontSize="0.75rem"
-                trigger="auto"
-                backgroundColor="transparent"
-                itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
-                highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-[0_8px_20px_rgba(37,99,235,0.3)]"
-              />
-            </div>
-          </motion.div>
-
-          {/* Card 4: Animated Live Chart */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.5 }}
-            className="md:col-span-1 md:row-span-1 rounded-[2.5rem] bg-white/60 backdrop-blur-3xl border border-blue-100 shadow-[0_10px_40px_rgba(37,99,235,0.05)] p-8 flex flex-col justify-between relative overflow-hidden"
-          >
-            <div className="flex justify-between items-start mb-6 z-10">
-              <div>
-                <h4 className="font-bold text-slate-900">Cash Flow</h4>
-                <p className="text-xs text-slate-500 font-semibold tracking-wide">+14% this month</p>
+            {/* 2. Floating Total Balance Card (Popping out) */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0, y: [-10, 10, -10] }}
+              transition={{ opacity: { duration: 0.8, delay: 0.6 }, y: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+              className="absolute z-30 -left-12 top-[20%] bg-gradient-to-br from-slate-900 to-slate-800 p-6 rounded-2xl shadow-[0_20px_50px_rgba(15,23,42,0.3)] border border-slate-700 w-64 transform translate-z-[50px]"
+            >
+              <div className="flex justify-between items-start mb-4">
+                <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
+                  <Banknote className="w-5 h-5 text-blue-400" />
+                </div>
+                <Sparkles className="w-4 h-4 text-slate-500" />
               </div>
-              <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
-                <Activity className="w-5 h-5 text-blue-600" />
-              </div>
-            </div>
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mb-1">Total Balance</p>
+              <h3 className="text-3xl font-black text-white tracking-tight">₹45.2M</h3>
+            </motion.div>
 
-            <div className="flex-1 flex items-end gap-1.5 z-10 h-full mt-4">
-              {Array.from({ length: 18 }).map((_, i) => (
-                <motion.div 
-                  key={i}
-                  initial={{ height: 0 }}
-                  animate={{ height: `${20 + Math.random() * 80}%` }}
-                  transition={{ delay: 1 + (i * 0.05), duration: 1.5, type: 'spring', repeat: Infinity, repeatType: 'reverse', repeatDelay: 2 }}
-                  className={`flex-1 rounded-t-sm ${i % 3 === 0 ? 'bg-blue-600' : 'bg-slate-200'} origin-bottom`}
+            {/* 3. Floating Physics Sandbox (Popping out on right) */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0, y: [10, -10, 10] }}
+              transition={{ opacity: { duration: 0.8, delay: 0.8 }, y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 } }}
+              className="absolute z-40 -right-8 bottom-[15%] bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-[0_20px_60px_rgba(37,99,235,0.15)] border border-white w-72 transform translate-z-[80px]"
+            >
+              <div className="flex justify-between items-center mb-3">
+                <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Active Assets</p>
+                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              </div>
+              {/* Mini Interactive Sandbox */}
+              <div className="w-full h-32 bg-slate-50 rounded-xl border border-slate-100 overflow-hidden relative shadow-inner">
+                <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                   <p className="text-[10px] text-blue-600 font-bold tracking-widest uppercase bg-white/80 px-2 py-1 rounded">Play</p>
+                </div>
+                <FallingText 
+                  text="Apple NVDA BTC Gold Cash Bonds"
+                  highlightWords={["Apple", "NVDA", "BTC"]}
+                  gravity={0.5}
+                  fontSize="0.65rem"
+                  trigger="auto"
+                  backgroundColor="transparent"
+                  itemClass="bg-white text-slate-700 border-slate-200 shadow-sm"
+                  highlightClass="!bg-blue-600 !border-blue-600 !text-white !shadow-md"
                 />
-              ))}
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
 
+            {/* 4. Floating Security Badge (Behind) */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1, y: [0, -20, 0] }}
+              transition={{ opacity: { duration: 0.6, delay: 1 }, y: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
+              className="absolute z-10 right-4 top-[10%] bg-blue-100/50 backdrop-blur-md p-3 rounded-full border border-blue-200 shadow-xl transform translate-z-[-30px]"
+            >
+              <ShieldCheck className="w-8 h-8 text-blue-600" />
+            </motion.div>
+
+          </motion.div>
         </div>
       </div>
     </section>
