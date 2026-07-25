@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Users, HandCoins, Landmark, Building2, CheckCircle2, ChevronRight, FileCheck, Banknote, Clock } from "lucide-react";
+import { Users, HandCoins, Landmark, Building2, CheckCircle2, ChevronRight, FileCheck, Banknote, Clock, Sparkles, ArrowRight, Check } from "lucide-react";
 import { EMICalculator } from "@/components/widgets/emi-calculator";
 import { TrustBadges } from "@/components/widgets/trust-badges";
 import { LoanProductCard } from "@/components/widgets/loan-product-card";
@@ -164,10 +164,10 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {[
-              { type: "Personal Loan", rate: "10.5% - 24%", fee: "Up to 2.5%", tenure: "12 - 60 Months", popular: false, icon: <Users className="w-6 h-6" /> },
-              { type: "Group Loan", rate: "18% - 26%", fee: "Up to 2%", tenure: "12 - 24 Months", popular: false, icon: <HandCoins className="w-6 h-6" /> },
-              { type: "Gold Loan", rate: "9% - 15%", fee: "Zero", tenure: "6 - 36 Months", popular: true, icon: <Landmark className="w-6 h-6" /> },
-              { type: "Business Loan", rate: "12% - 22%", fee: "Up to 3%", tenure: "12 - 84 Months", popular: false, icon: <Building2 className="w-6 h-6" /> },
+              { type: "Personal Loan", rate: "10.5% - 24%", fee: "Up to 2.5%", tenure: "12 - 60 Months", popular: false, icon: <Users className="w-6 h-6" />, features: ["Instant Approval in 4hrs", "No Collateral Required", "Flexible Repayment"] },
+              { type: "Group Loan", rate: "18% - 26%", fee: "Up to 2%", tenure: "12 - 24 Months", popular: false, icon: <HandCoins className="w-6 h-6" />, features: ["Joint Liability Structure", "Lowest Processing Fee", "Minimal Documentation"] },
+              { type: "Gold Loan", rate: "9% - 15%", fee: "Zero", tenure: "6 - 36 Months", popular: true, icon: <Landmark className="w-6 h-6" />, features: ["Highest LTV Ratio", "Instant Disbursal", "Zero Foreclosure Charges"] },
+              { type: "Business Loan", rate: "12% - 22%", fee: "Up to 3%", tenure: "12 - 84 Months", popular: false, icon: <Building2 className="w-6 h-6" />, features: ["Collateral Free Options", "Custom Repayment Terms", "Dedicated Account Manager"] },
             ].map((plan, i) => (
               <FadeIn key={plan.type} delay={i * 0.1}>
                 <div 
@@ -198,10 +198,19 @@ export default function Home() {
                       <span className="text-sm text-slate-500">Processing Fee</span>
                       <span className="text-sm font-semibold text-slate-900">{plan.fee}</span>
                     </div>
-                    <div className="flex items-center justify-between py-3 border-b border-slate-100">
+                    <div className="flex items-center justify-between py-3 border-b border-slate-100 mb-6">
                       <span className="text-sm text-slate-500">Tenure</span>
                       <span className="text-sm font-semibold text-slate-900">{plan.tenure}</span>
                     </div>
+
+                    <ul className="space-y-3 mt-6">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                          <span className="text-sm text-slate-600">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   <Button 
