@@ -38,9 +38,9 @@ export function EMICalculator({
     }).format(val);
 
   const { emi, totalInterest, totalPayment, principalPercent } = useMemo(() => {
-    const P = amount;
-    const R = rate / 12 / 100;
-    const N = tenure;
+    const P = amount || 0;
+    const R = (rate || 0) / 12 / 100;
+    const N = tenure || 0;
 
     if (P <= 0 || R <= 0 || N <= 0) {
       return { emi: 0, totalInterest: 0, totalPayment: 0, principalPercent: 100 };
@@ -62,6 +62,9 @@ export function EMICalculator({
   // Circumference for the SVG circle (r=40 -> 2 * PI * 40 ~= 251.2)
   const circleCircumference = 251.2;
   const strokeDashoffset = circleCircumference - (circleCircumference * principalPercent) / 100;
+
+  // Clamp helper for sliders to prevent Radix UI crash
+  const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
 
   return (
     <div className="w-full max-w-4xl mx-auto relative group">
@@ -88,15 +91,15 @@ export function EMICalculator({
                   <span className="text-muted-foreground/60 text-xl font-light mr-1">₹</span>
                   <Input
                     type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(Number(e.target.value))}
+                    value={amount || ""}
+                    onChange={(e) => setAmount(e.target.value === "" ? 0 : Number(e.target.value))}
                     className="w-32 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground shadow-none"
                   />
                 </div>
               </div>
               <div className="relative">
                 <Slider
-                  value={[amount]}
+                  value={[clamp(amount, minAmount, maxAmount)]}
                   min={minAmount}
                   max={maxAmount}
                   step={10000}
@@ -113,15 +116,15 @@ export function EMICalculator({
                 <div className="flex items-baseline text-foreground">
                   <Input
                     type="number"
-                    value={tenure}
-                    onChange={(e) => setTenure(Number(e.target.value))}
+                    value={tenure || ""}
+                    onChange={(e) => setTenure(e.target.value === "" ? 0 : Number(e.target.value))}
                     className="w-16 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-1 shadow-none"
                   />
                   <span className="text-muted-foreground font-medium text-lg">mo</span>
                 </div>
               </div>
               <Slider
-                value={[tenure]}
+                value={[clamp(tenure, minTenure, maxTenure)]}
                 min={minTenure}
                 max={maxTenure}
                 step={1}
@@ -137,8 +140,8 @@ export function EMICalculator({
                 <div className="flex items-baseline text-foreground">
                   <Input
                     type="number"
-                    value={rate}
-                    onChange={(e) => setRate(Number(e.target.value))}
+                    value={rate || ""}
+                    onChange={(e) => setRate(e.target.value === "" ? 0 : Number(e.target.value))}
                     step={0.1}
                     className="w-20 text-right font-bold text-2xl md:text-3xl bg-transparent border-none p-0 focus-visible:ring-0 text-foreground mr-1 shadow-none"
                   />
@@ -146,7 +149,7 @@ export function EMICalculator({
                 </div>
               </div>
               <Slider
-                value={[rate]}
+                value={[clamp(rate, 5, 36)]}
                 min={5}
                 max={36}
                 step={0.1}
@@ -208,7 +211,7 @@ export function EMICalculator({
                   <div className="w-2 h-2 rounded-full bg-primary" />
                   <span className="text-muted-foreground text-[10px] font-bold uppercase tracking-widest">Principal</span>
                 </div>
-                <div className="font-bold text-foreground text-sm">{formatCurrency(amount)}</div>
+                <div className="font-bold text-foreground text-sm">{formatCurrency(amount || 0)}</div>
               </div>
               <div className="p-3 rounded-xl bg-white border border-border/50 shadow-sm text-center">
                 <div className="flex items-center justify-center gap-1.5 mb-1">
