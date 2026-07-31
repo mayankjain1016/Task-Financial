@@ -63,8 +63,11 @@ export function EMICalculator({
   const circleCircumference = 251.2;
   const strokeDashoffset = circleCircumference - (circleCircumference * principalPercent) / 100;
 
-  // Clamp helper for sliders to prevent Radix UI crash
-  const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
+  // Clamp helper for sliders to prevent Radix UI crash on NaN
+  const clamp = (val: number, min: number, max: number) => {
+    if (isNaN(val)) return min;
+    return Math.min(Math.max(val, min), max);
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto relative group">
